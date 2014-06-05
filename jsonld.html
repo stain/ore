@@ -408,9 +408,53 @@ It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
 </p>
 
 
-<h4>proxies, proxyFor</h4>
+<h4>proxies, proxyFor, proxyIn</h4>
 
 <div class="TODO">Describe proxies</div>
+
+<pre class="draft">
+{ "@context": "https://w3id.org/ore/1.0/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      "aggregates": [
+          { "@id": "http://example.com/document-1" },
+      ],
+      <strong>
+      "proxies": [
+              { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+                "@type": "Proxy",
+                "proxyFor": "http://example.com/document-1" }
+      ]
+      </strong>
+  }
+}
+</pre>
+
+<code>proxyIn</code> SHOULD NOT be provided for proxies listed under
+<code>proxies</code>,  but when aggregating a <code>Proxy</code> from a
+different aggregation, it MUST specify <code>proxyIn</code>: 
+
+<pre>
+{ "@context": "https://w3id.org/ore/1.0/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      "aggregates": [
+          { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+            "@type": "Proxy",
+            "proxyFor": "http://example.com/document-1",
+            "proxyIn": "http://other.example.org/aggregation-3"
+          }
+      ]
+  }
+}
+</pre>
+
+These proxies MUST NOT be listed under <code>proxies</code> as a proxy can
+only be <code>proxyFor</code> for a single <code>Aggregation</code>.
 
 <h2 id="context">3. ORE JSON-LD context</h2>
 
