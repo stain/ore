@@ -258,7 +258,7 @@ MUST be valid <a href="http://www.w3.org/TR/json-ld/">JSON-LD</a>.
 
 <p>
 An ORE JSON-LD resource MUST define a JSON-LD <code>@context</code>,
-which SHOULD be <code>"https://w3id.org/ore/1.0/context"</code>
+which SHOULD be <code>"https://w3id.org/ore/context"</code>
 (see <a href="#context">ORE JSON-LD context</a> below). 
 </p>
 <p class="draft">
@@ -277,7 +277,7 @@ in which case it MUST indicate which <code>Aggregation</code> it <code>describes
 </p>
 
 <pre>
-{ "@context": "https://w3id.org/ore/1.0/context",
+{ "@context": "https://w3id.org/ore/context",
   <strong>
   "@type": "ResourceMap",
   "describes": {
@@ -294,7 +294,7 @@ The <code>Aggregation</code> MAY list other resource maps it <code>isDescribedBy
 which SHOULD be given as a JSON list of URIs:
 
 <pre>
-{ "@context": "https://w3id.org/ore/1.0/context",
+{ "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
   "describes": {
       "@id": "http://example.com/aggregation-1",
@@ -316,7 +316,7 @@ contain either URI strings or JSON Objects, which SHOULD specify their URI
 with <code>@id</code>:
 
 <pre>
-{ "@context": "https://w3id.org/ore/1.0/context",
+{ "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
   "describes": {
       "@id": "http://example.com/aggregation-1",
@@ -345,7 +345,7 @@ additional <a href="http://www.w3.org/TR/json-ld/#the-context"><code>@context</c
 
 <pre>
 { "@context": [
-    "https://w3id.org/ore/1.0/context",
+    "https://w3id.org/ore/context",
     { 
       "foaf": "http://xmlns.com/foaf/0.1/",
       "schema": "http://schema.org/",
@@ -383,7 +383,7 @@ If a resource is also part of a <em>different</em> <code>Aggregation</code>,
 then this can be indicated with <code>isAggregatedBy</code>:
 
 <pre>
-{ "@context": "https://w3id.org/ore/1.0/context",
+{ "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
   "describes": {
       "@id": "http://example.com/aggregation-1",
@@ -413,7 +413,7 @@ It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
 <div class="TODO">Describe proxies</div>
 
 <pre class="draft">
-{ "@context": "https://w3id.org/ore/1.0/context",
+{ "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
   "describes": {
       "@id": "http://example.com/aggregation-1",
@@ -437,7 +437,7 @@ It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
 different aggregation, it MUST specify <code>proxyIn</code>: 
 
 <pre>
-{ "@context": "https://w3id.org/ore/1.0/context",
+{ "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
   "describes": {
       "@id": "http://example.com/aggregation-1",
@@ -471,25 +471,22 @@ convert to other RDF formats.
 
 
 <div>
-        The context is available from <a href="https://w3id.org/ore/1.0/context">https://w3id.org/ore/1.0/context</a>, from
+        The context is available from <a href="https://w3id.org/ore/context">https://w3id.org/ore/context</a>, from
         where it SHOULD be included using the <code>@context</code> keyword at the top-level node of ORE JSON-LD documents:
 
         <pre>
-          { "@context": "https://w3id.org/ore/1.0/context",
+          { "@context": "https://w3id.org/ore/context",
             "@type": "ResourceMap",
             "...": ""
           }
         </pre>
         
 
-<div class="TODO">
-Register redirection at above URI.
-</div>
 </div>
 
         <div class="draft">
                 An alternative context is available at
-        <a href="https://w3id.org/ore/1.0/context-ore">https://w3id.org/ore/1.0/context-ore</a>, 
+        <a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>, 
         which defines ORE terms with the <code>ore:</code> prefix. This context MAY be used instead,
         for instance to avoid naming conflicts when including the ORE context in another JSON-LD context
 </div>
@@ -562,7 +559,7 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
 
 <a href="framed-example.json">framed-example.json</a>:
 <pre class="draft">
-{ "@context": "https://w3id.org/ore/1.0/context",
+{ "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
   "describes": {
       "@id": "http://example.com/aggregation-1",
