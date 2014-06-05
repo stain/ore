@@ -10,36 +10,36 @@
     lang="en"
     xml:lang="en">
 <head>
-	<title>ORE User Guide - Resource Map Implementation in JSON-LD</title>
-	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<link rel="shortcut icon" href="http://www.openarchives.org/ore/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="http://www.openarchives.org/ore/1.0/ore-spec.css" type="text/css" />
-	<style type="text/css">
-	.TODO:before { 
-		content: "TODO: ";
-		font-weight: bold;
-	}
-	.TODO { 
-		display: block;
-		background: #ee6;
-		border: 1px dashed #444;
-		padding: 0.4em;
+        <title>ORE User Guide - Resource Map Implementation in JSON-LD</title>
+        <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+        <link rel="shortcut icon" href="http://www.openarchives.org/ore/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="http://www.openarchives.org/ore/1.0/ore-spec.css" type="text/css" />
+        <style type="text/css">
+        .TODO:before { 
+                content: "TODO: ";
+                font-weight: bold;
+        }
+        .TODO { 
+                display: block;
+                background: #ee6;
+                border: 1px dashed #444;
+                padding: 0.4em;
 
-	}
-	.draft:before { 
-		content: "(Subject to change)";
-		font-style: italic;
-		margin-bottom: 1em;
-		display: block;
-	}
-	.draft { 
-		color: #555;
-		border: 3pt dashed #444;
-		padding-top: 1em;
-		padding-bottom: 1em;
-	}
+        }
+        .draft:before { 
+                content: "(Subject to change)";
+                font-style: italic;
+                margin-bottom: 1em;
+                display: block;
+        }
+        .draft { 
+                color: #555;
+                border: 3pt dashed #444;
+                padding-top: 1em;
+                padding-bottom: 1em;
+        }
 
-	</style>
+        </style>
 </head>
 
 <body>
@@ -75,10 +75,10 @@
   <dd>Carl Lagoze, Cornell University Information Science</dd>
   -->
   <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0002-0715-6126">Herbert Van de Sompel</a>, 
-	<a href="http://www.lanl.gov/i">Los Alamos National Laboratory</a></dd>
-  <dt>Editors (ORE Technical Committee)</dt>
+        <a href="http://www.lanl.gov/i">Los Alamos National Laboratory</a></dd>
+  <dt>Editors <!--(ORE Technical Committee)--></dt>
   <dd><a property="pav:authoredBy" href="http://orcid.org/0000-0001-9842-9718">Stian Soiland-Reyes</a>, 
-  	<a href="http://www.cs.manchester.ac.uk/">University of Manchester</a></dd>
+          <a href="http://www.cs.manchester.ac.uk/">University of Manchester</a></dd>
 </dl>
 
 <!--END-HEADER-->
@@ -103,8 +103,8 @@ between these and other resources).</p>
 Graph, it can be serialized using any RDF syntax.  This document
 outlines the use of one such syntax for the serialization of Resource
 Maps: <a href="http://json-ld.org/">JSON-LD</a>. Two companion document 
-	[<a href="#ORE_RDFa">ORE RDFa</a>]       and 
-	[<a href="#ORE_RDFXML">ORE RDF/XML</a>]
+        [<a href="#ORE_RDFa">ORE RDFa</a>]       and 
+        [<a href="#ORE_RDFXML">ORE RDF/XML</a>]
 outline the serialization of Resource Maps in 
 [<a href="http://www.w3.org/TR/rdfa-syntax/">RDFa Syntax</a>] and 
 <a href="#RDFXML_Syntax">RDF/XML syntax</a>].</p>
@@ -166,14 +166,16 @@ permitted by RDF/XML.</p>
 interpreted as described in RFC 2119
 [<cite><a href="#RFC2119">IETF RFC 2119</a></cite>].</p>
 
-<p>This specification uses the common term URI to mean both IRI
-[<a href="#RFC3987">RFC3987</a>] and URI [<a href="#RFC3986">RFC3986</a>].</p>
+<p>This specification may use the common term URI to mean both IRI
+[<a href="#RFC3987">RFC3987</a>] and URI [<a href="#RFC3986">RFC3986</a>].
+JSON-LD <a href="http://www.w3.org/TR/json-ld/#iris">natively supports IRIs</a>
+without any special measures.
+</p>
 
 
   <h3>1.2 <a id="Namespaces" name="Namespaces">Namespaces</a></h3>
 
-  <p>This specification uses the following namespaces and prefixes to indicate
-  those namespaces:</p>
+  <p>This specification uses the following namespaces and prefixes:</p>
 
   <table class="namespace-table" summary="Namespaces table">
    <tr>
@@ -181,40 +183,46 @@ interpreted as described in RFC 2119
     <th>Namespace URI</th>
     <th>Description</th>
    </tr>
-   <!--
-   <tr>
-    <td><span class="code">dc</span></td>
-    <td><span class="code">http://purl.org/dc/elements/1.1/</span></td>
-    <td>Dublin Core elements</td>
-   </tr>
-
-   <tr>
-    <td><span class="code">dcterms</span></td>
-
-    <td><span class="code">http://purl.org/dc/terms/</span></td>
-    <td>Dublin Core terms</td>
-   </tr>
-   <tr>
-    <td><span class="code">foaf</span></td>
-    <td><span class="code">http://xmlns.com/foaf/0.1/</span></td>
-    <td>FOAF vocabulary terms</td>
-  </tr>
-  -->
    <tr>
     <td><span class="code">ore</span></td>
     <td><span class="code">http://www.openarchives.org/ore/terms/</span></td>
-    <td>ORE vocabulary terms</td>
+    <td><a href="http://www.openarchives.org/ore/1.0/vocabulary">ORE vocabulary</a></td>
    </tr>
    <tr>
     <td><span class="code">rdf</span></td>
     <td><span class="code">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span></td>
-    <td>RDF vocabulary terms</td>
+    <td>RDF vocabulary </td>
    </tr>
    <tr>
     <td><span class="code">rdfs</span></td>
     <td><span class="code">http://www.w3.org/2000/01/rdf-schema#</span></td>
-    <td>RDFS vocabulary terms</td>
+    <td><a href="http://www.w3.org/TR/rdf-schema/">RDFS</a> vocabulary </td>
    </tr>
+   <tr>
+    <td><span class="code">owl</span></td>
+    <td><span class="code">http://www.w3.org/2002/07/owl#</span></td>
+    <td><a href="http://www.w3.org/TR/owl2-primer/">OWL</a> vocabulary </td>
+   </tr>
+   <tr>
+    <td><span class="code">dcterms</span></td>
+    <td><span class="code">http://purl.org/dc/terms/</span></td>
+    <td><a href="http://dublincore.org/documents/2012/06/14/dcmi-terms/">Dublin Core Terms</a></td>
+   </tr>
+   <tr>
+    <td><span class="code">prov</span></td>
+    <td><span class="code">http://w3.org/ns/prov#/</span></td>
+    <td><a href="http://www.w3.org/TR/prov-o/">PROV Ontology</a></td>
+   </tr>
+   <tr>
+    <td><span class="code">pav</span></td>
+    <td><span class="code">http://purl.org/dc/pav/</span></td>
+    <td><a href="http://purl.org/pav/html">PAV</a> vocabulary</a></td>
+   </tr>
+   <tr>
+    <td><span class="code">foaf</span></td>
+    <td><span class="code">http://xmlns.com/foaf/0.1/</span></td>
+    <td><a href="http://xmlns.com/foaf/spec/">FOAF</a> vocabulary</td>
+  </tr>
   </table>
 
   <h3>1.3 <a id="Conformance" name="Conformance">Conformance</a></h3>
@@ -222,8 +230,9 @@ interpreted as described in RFC 2119
   <p>The Internet Media Type (MIME type) for JSON-LD is 
   <a href="http://www.w3.org/TR/json-ld/#application-ld-json"><code>application/ld+json</code></a>.
 Where JSON-LD is used to provide representations of ORE Resource Maps, that
-media type SHOULD be used. Alternatively, the JSON-LD specification allows for
-the content-type of <code>application/json</code>, in which case the
+media type SHOULD be used. For backwards compatibility, the JSON-LD
+specification allows for the alternative content-type of
+<code>application/json</code>, in which case the
 <a href="http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld">JSON-LD context Link header</a>
 MUST be present.
 
@@ -234,6 +243,136 @@ supported by conformant JSON-LD parsers.</p>
 
 
 <h2 id="syntax">2. Overview of ORE in JSON-LD syntax</h2>
+
+<p>
+An ORE Resource Map expressed as a JSON-LD resource MUST be valid 
+<a href="https://www.ietf.org/rfc/rfc4627">JSON</a>, and 
+MUST be valid <a href="http://www.w3.org/TR/json-ld/">JSON-LD</a>.
+</p>
+
+
+<p>
+An ORE JSON-LD resource MUST define a JSON-LD <code>@context</code>,
+which SHOULD be <code>"https://w3id.org/ore/1.0/context"</code>
+(see <a href="#context">ORE JSON-LD context</a> below). 
+</p>
+<p class="draft">
+The <code>@type</code> SHOULD be provided for ORE resources of type 
+<code>Aggregation</code>,
+<code>ResourceMap</code>,
+<code>Proxy</code>, and MAY be provided for resources of type
+<code>AggregatedResource</code> and others.
+</p>
+
+<h4>ResourceMap, describes, Aggregation</h4>
+<p>
+The <code>ResourceMap</code> SHOULD be the top-level JSON object
+(indicating that the JSON-LD document <em>is</em> the resource map), 
+in which case it MUST indicate which <code>Aggregation</code> it <code>describes</code>:
+</p>
+
+<pre>
+{ "@context": "https://w3id.org/ore/1.0/context",
+  <strong>
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation"
+  }
+  </strong>
+}
+</pre>
+
+
+<h4>isDescribedBy</h4>
+The <code>Aggregation</code> MAY list other resource maps it <code>isDescribedBy</code>, 
+which SHOULD be given as a JSON list of URIs:
+
+<pre>
+{ "@context": "https://w3id.org/ore/1.0/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      <strong>
+      "isDescribedBy": [
+          "http://example.com/aggregation-1.rdf",
+          "http://example.com/aggregation-1.jsonld"
+      ]
+      </strong>
+  }
+}
+</pre>
+
+<h4>aggregates</h4>
+All resources aggregated by this <code>Aggregation</code> MUST be listed using
+<code>aggregates</code>, which SHOULD be given as a JSON list. The list MUST
+contain either URI strings or JSON Objects, which SHOULD specify their URI
+with <code>@id</code>:
+
+<pre>
+{ "@context": "https://w3id.org/ore/1.0/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      <strong>
+      "aggregates": [
+          "http://example.com/document-1",
+          { "@id": "http://other.example.org/data-2",
+            "@type": "dcterms:Dataset"
+          }
+      ]
+      </strong>
+  }
+}
+</pre>
+
+Additional descriptions about the aggregated resource MAY be provided using other RDF vocabularies
+according to the <a href="http://www.w3.org/TR/json-ld/">JSON-LD syntax</a>,
+for instance, to indicate their <code>@type</code> of
+<code>dcterms:Dataset</code> (see above).
+
+The example below shows how to to indicate the provenance of an aggregated resource using
+<a href="http://www.w3.org/TR/prov-o/">PROV-O</a> and <a href="http://purl.org/pav/html">PAV</a>. 
+When using third-party vocabularies it may be desired to add prefixes using
+additional <a href="http://www.w3.org/TR/json-ld/#the-context"><code>@context</code></a>(s):
+
+<pre>
+{ "@context": [
+    "https://w3id.org/ore/1.0/context",
+    { 
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "schema": "http://schema.org/",
+      "prov": "http://www.w3.org/ns/prov#",
+      "pav": "http://purl.org/pav/"
+    }
+  ],
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      "aggregates": [
+          "http://example.com/document-1",
+          {  "@id": "http://example.com/blog/",
+	  <strong>
+	     "@type": "schema:BlogPosting",
+	     "prov:wasDerivedFrom": { 
+	         "@id": "http://example.com/document-1" 
+             },
+             "pav:authoredBy": {
+                "@id": "http://orcid.org/0000-0001-9842-9718",
+                "foaf:name": "Stian Soiland-Reyes"
+             } 
+	  </strong>
+          }
+      ]
+  }
+}
+
+
+</pre>
+
 
 
 <h2 id="context">3. ORE JSON-LD context</h2>
@@ -250,20 +389,16 @@ convert to other RDF formats.
 </p>
 
 <div>
-	The context is available from <a href="https://w3id.org/ore/1.0/context">https://w3id.org/ore/1.0/context</a>, from
-	where it SHOULD be included using the <code>@context</code> keyword at the top-level node of ORE JSON-LD documents:
+        The context is available from <a href="https://w3id.org/ore/1.0/context">https://w3id.org/ore/1.0/context</a>, from
+        where it SHOULD be included using the <code>@context</code> keyword at the top-level node of ORE JSON-LD documents:
 
-	<pre>
-	  { "@context": "https://w3id.org/ore/1.0/context",
-	    "@type": "ResourceMap",
-	    "...": ""
-	  }
-	    "describes": {
-	        "@type": "Aggregation",
-		"@id": "http://example.com/aggregation-1"
-	    }
-	</pre>
-	
+        <pre>
+          { "@context": "https://w3id.org/ore/1.0/context",
+            "@type": "ResourceMap",
+            "...": ""
+          }
+        </pre>
+        
 
 <div class="TODO">
 Register redirection at above URI.
@@ -329,10 +464,11 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
 <h2 id="frame">4. ORE JSON-LD frame</h2>
 
 <div class="TODO">
-	Define a <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-LD Frame</a> for structuring
-	an ORE JSON-LD document according to this structure:
+        Define a <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-LD Frame</a> for structuring
+        an ORE JSON-LD document according to this structure:
 </div>
 
+<a href="framed-example.json">framed-example.json</a>:
 <pre class="draft">
 { "@context": "https://w3id.org/ore/1.0/context",
   "@type": "ResourceMap",
@@ -342,25 +478,25 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
       "isDescribedBy": [
           "http://example.com/aggregation-1.rdf",
           "http://example.com/aggregation-1.jsonld"
-      ]
+      ],
       "aggregates": [
           { "@id": "http://example.com/document-1" },
-	  { "@id": "http://other.example.org/data-2",
-	    "isAggregatedBy": { 
-	        "@id": "http://other.example.org/aggregation-2",
-		"@type": "Aggregation"
-      	    }
-	  },
-	  { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
-	    "@type": "Proxy",
-	    "proxyFor": "http://example.com/document-1",
-	    "proxyIn": "http://other.example.org/aggregation-3"
-	  }
-      ]
+          { "@id": "http://other.example.org/data-2",
+            "isAggregatedBy": { 
+                "@id": "http://other.example.org/aggregation-2",
+                "@type": "Aggregation"
+            }
+          },
+          { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+            "@type": "Proxy",
+            "proxyFor": "http://example.com/document-1",
+            "proxyIn": "http://other.example.org/aggregation-3"
+          }
+      ],
       "proxies": [
-      	{ "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
-	  "@type": "Proxy",
-	  "proxyFor": "http://example.com/document-1" }
+              { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+                "@type": "Proxy",
+                "proxyFor": "http://example.com/document-1" }
       ]
   }
 }
@@ -399,7 +535,7 @@ available at http://www.w3.org/TR/rdf-concepts/ .</dd>
 
 <dt>[<a id="RDFa_Syntax" name="RDFa_Syntax">RDFa Syntax</a>]</dt>
 <dd><a href="http://www.w3.org/TR/2013/REC-rdfa-core-20130822/"><cite>RDFa
-		Core 1.1 - Second edition</cite></a>,
+                Core 1.1 - Second edition</cite></a>,
 Ben Adida, Mark Birbeck, Shane McCarron and Ivan Herman (Editors)
 W3C Recommendation 22 August 2013.<br />
 Available at <a href="http://www.w3.org/TR/2013/REC-rdfa-core-20130822">http://www.w3.org/TR/2013/REC-rdfa-core-20130822</a>.<br />
@@ -461,6 +597,7 @@ the <a href="http://mellon.org/">Andrew W. Mellon Foundation</a>,
 <a href="http://nsf.gov">National Science Foundation</a>.&nbsp; Additional 
 support is provided by the <a href="http://www.cni.org">Coalition for 
 Networked Information</a>.</p>
+<!--
 <p>This document is based on meetings of the
 <a href="http://www.openarchives.org/ore/ORE_Community.php#OAI-ORE_Technical_Committee">
 OAI-ORE Technical Committee</a> (ORE-TC), with participation from the
@@ -481,6 +618,7 @@ Inc. and DSpace)</p>
 <p>We also acknowledge comments from the
 <a href="http://www.openarchives.org/ore/ORE_Community.php#OAI-ORE_Advisory_Committee">
 OAI-ORE Advisory Committee</a> (ORE-AC).</p>
+-->
 </div>
 <!--END-INCLUDE=_acknowledgements.inc-->
 
@@ -492,21 +630,11 @@ OAI-ORE Advisory Committee</a> (ORE-AC).</p>
             <th>Editor</th>
             <th>Description</th>
         </tr>
-	<tr>
-	    <td>2008-10-17</td>
-	    <td>johnston</td>
-	    <td>public 1.0 release</td>
-	</tr>
-	<tr>
-	    <td>2008-06-02</td>
-	    <td>johnston/lagoze</td>
-	    <td>public beta 0.9 release</td>
-	</tr>
-	<tr>
-	    <td>2008-02-29</td>
-	    <td>johnston</td>
-	    <td>public alpha 0.2 release (then part of rdfsyntax document)</td>
-	</tr>
+        <tr>
+            <td>2014-06-05</td>
+            <td>stain</td>
+            <td>First draft</td>
+        </tr>
 </tbody>
 </table>
 </div>
