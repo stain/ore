@@ -42,6 +42,9 @@
     "isDescribedBy" : {
       "@id" : "http://www.openarchives.org/ore/terms/isDescribedBy",
       "@type" : "@id"
+    },
+    "proxies": {
+      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn",
     }
   }
 }
