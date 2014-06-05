@@ -1,0 +1,30 @@
+{ "@context": "https://w3id.org/ore/1.0/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      "isDescribedBy": [
+          "http://example.com/aggregation-1.rdf",
+          "http://example.com/aggregation-1.jsonld"
+      ],
+      "aggregates": [
+          { "@id": "http://example.com/document-1" },
+	  { "@id": "http://other.example.org/data-2",
+	    "isAggregatedBy": { 
+	        "@id": "http://other.example.org/aggregation-2",
+		"@type": "Aggregation"
+      	    }
+	  },
+	  { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+	    "@type": "Proxy",
+	    "proxyFor": "http://example.com/document-1",
+	    "proxyIn": "http://other.example.org/aggregation-3"
+	  }
+      ],
+      "proxies": [
+      	{ "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+	  "@type": "Proxy",
+	  "proxyFor": "http://example.com/document-1" }
+      ]
+  }
+}
