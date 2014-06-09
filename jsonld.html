@@ -311,6 +311,30 @@ which SHOULD be given as a JSON list of URIs:
 }
 </pre>
 
+
+<h4 id="similarTo">similarTo</h4>
+
+<p>
+If an <code>Aggregation</code> can be considered
+<a href="http://www.openarchives.org/ore/1.0/vocabulary#ore-simularTo">similar to</a> another
+resource, like a journal article identified with a DOI, then this MAY be indicated using
+<code>similarTo</code>:
+</p>
+
+<pre>
+{ "@context": "https://w3id.org/ore/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      <strong>
+      "isSimilarTo": "http://dx.doi.org/10.1016/1.2.3"
+      </strong>
+  }
+}
+</pre>
+
+
 <h4>aggregates</h4>
 All resources aggregated by this <code>Aggregation</code> MUST be listed using
 <code>aggregates</code>, which SHOULD be given as a JSON list. The list MUST
@@ -503,7 +527,7 @@ to provide <code>isDescribedBy</code> .
 <h4 id="lineage">lineage</h4>
 <p>
 If an aggregated resource was discovered in a different aggregation, this 
-<a href="http://www.openarchives.org/ore/1.0/vocabulary#lineage">lineage</a>
+<a href="http://www.openarchives.org/ore/1.0/vocabulary#ore-lineage">lineage</a>
 can be described between the corresponding proxies:
 </p>
 
