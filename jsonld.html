@@ -335,15 +335,19 @@ with <code>@id</code>:
 }
 </pre>
 
+<p>
+The resource MAY specify its <code>"@type": "AggregatedResource"</code>.
+</p>
+<p>
 Additional descriptions about the aggregated resource MAY be provided using other RDF vocabularies
 according to the <a href="http://www.w3.org/TR/json-ld/">JSON-LD syntax</a>,
-for instance, to indicate their <code>@type</code> of
+for instance, to indicate a specific <code>@type</code> of
 <code>dcterms:Dataset</code> (see above).
-
 The example below shows how to to indicate the provenance of an aggregated resource using
 <a href="http://www.w3.org/TR/prov-o/">PROV-O</a> and <a href="http://purl.org/pav/html">PAV</a>. 
 When using third-party vocabularies it may be desired to add prefixes using
 additional <a href="http://www.w3.org/TR/json-ld/#the-context"><code>@context</code></a>(s):
+</p>
 
 <pre>
 { "@context": [
@@ -381,9 +385,10 @@ additional <a href="http://www.w3.org/TR/json-ld/#the-context"><code>@context</c
 </pre>
 
 <h4>isAggregatedBy, isDescribedBy</h4>
+<p>
 If a resource is also part of a <em>different</em> <code>Aggregation</code>,
 then this can be indicated with <code>isAggregatedBy</code>:
-
+</p>
 <pre>
 { "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
@@ -407,8 +412,32 @@ then this can be indicated with <code>isAggregatedBy</code>:
 <p>
 It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
 <code>Aggregation</code>, but one MAY use <code>isDescribedBy</code> to indicate
-its <code>ResourceMap</code> representations.
+its <code>ResourceMap</code> representations.</p>
+    
+    
+<p>If <em>aggregating another Aggregation</em>, 
+it SHOULD be typed as an <code>Aggregation</code>, 
+and SHOULD specify at least one <code>isDescribedBy</code>:
 </p>
+
+<pre>
+{ "@context": "https://w3id.org/ore/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      "aggregates": [
+          { "@id": "http://other.example.org/aggregation-2",
+          <strong>
+            "@type": "Aggregation",
+            "isDescribedBy": [ "http://other.example.org/aggregation-2.rdf",
+                               "http://other.example.org/aggregation-2.jsonld""]
+          </strong>
+          }
+      ]
+   }
+}
+</pre>
 
 
 <h4>proxies, proxyFor, proxyIn</h4>
@@ -416,8 +445,7 @@ its <code>ResourceMap</code> representations.
 <p>
 <a href="http://www.openarchives.org/ore/1.0/vocabulary#proxy">Proxies</a> 
 represents an <code>AggregatedResource</code> as it exists in a specific <code>Aggregation</code>.
-To indicate the <a href="">proxies</a> , use
-<code>proxies</code> and <code>proxyFor</code>:
+To add a <code>Proxy</code>, use <code>proxies</code> and <code>proxyFor</code>:
 </p>
 
 <pre>
@@ -455,8 +483,10 @@ a proxy</em> (from a different aggregation), it MUST specify <code>proxyIn</code
       "aggregates": [
           { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
             "@type": "Proxy",
+<strong>
             "proxyFor": "http://example.com/document-1",
             "proxyIn": "http://other.example.org/aggregation-3"
+</strong>
           }
       ]
   }
