@@ -525,13 +525,13 @@ MAY be expanded to a JSON Object with <code>@id</code> and <code>"@type": "Aggre
 to provide <code>isDescribedBy</code> .
 </p>
 
-<h4 id="lineage">lineage</h4>
+<div class="draft">
+<h4 id="lineage">lineage and provenance of proxy</h4>
 <p>
-If an aggregated resource was discovered in a different aggregation, this 
+If an aggregated resource was <em></em>discovered in a different aggregation</e>, this 
 <a href="http://www.openarchives.org/ore/1.0/vocabulary#ore-lineage">lineage</a>
 can be described between the corresponding proxies:
 </p>
-
 
 <pre>
 { "@context": "https://w3id.org/ore/context",
@@ -542,7 +542,6 @@ can be described between the corresponding proxies:
       "aggregates": [
           { "@id": "http://example.com/document-1" },
       ],
-      <strong>
       "proxies": [
               { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
                 "@type": "Proxy",
@@ -556,11 +555,52 @@ can be described between the corresponding proxies:
                 }
                 </strong>
       ]
-      </strong>
   }
 }
 </pre>
 
+Other kinds of provenance of a proxy (e.g. who aggregated the given resource)
+MAY be stated using vocabularies like 
+<a href="http://www.w3.org/TR/prov-o/">PROV-O</a> 
+and <a href="http://purl.org/pav/html">PAV</a>. The example below says that Stian 
+aggregated document-1 (e.g. created its proxy in this aggregation) on the 
+17th of May 2014:
+<pre>
+
+</pre>
+{ "@context": [
+    "https://w3id.org/ore/context",
+    { 
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "prov": "http://www.w3.org/ns/prov#",
+    }
+  ],
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      "aggregates": [
+          "http://example.com/document-1",
+      ],
+      "proxies": [
+              { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+                "@type": "Proxy",
+                "proxyFor": "http://example.com/document-1" 
+<strong>
+                "prov:attributedTo": {
+                    "@id": "http://orcid.org/0000-0001-9842-9718",
+                    "foaf:name": "Stian Soiland-Reyes"
+                },
+                "prov:generatedAtTime": { 
+                    "@value": "2014-05-17T14:00:00Z"
+                    "@type": "xsd:dateTime"
+</strong>                
+                }
+      ]
+  }
+}
+
+</div>
 
 
 <h2 id="context">3. ORE JSON-LD context</h2>
@@ -595,7 +635,7 @@ convert to other RDF formats.
                 An alternative context is available at
         <a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>, 
         which defines ORE terms with the <code>ore:</code> prefix. This context MAY be used instead,
-        for instance to avoid naming conflicts when including the ORE context in another JSON-LD context
+        for instance to avoid naming conflicts when including the ORE context in another JSON-LD context.
 </div>
 
 <p>
