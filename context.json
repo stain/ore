@@ -22,7 +22,8 @@
       "@id" : "http://www.openarchives.org/ore/terms/ResourceMap"
     },
     "similarTo" : {
-      "@id" : "http://www.openarchives.org/ore/terms/similarTo"
+      "@id" : "http://www.openarchives.org/ore/terms/similarTo",
+      "@type" : "@id"
     },
     "Aggregation" : {
       "@id" : "http://www.openarchives.org/ore/terms/Aggregation"
