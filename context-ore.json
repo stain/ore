@@ -44,7 +44,7 @@
       "@id" : "http://www.openarchives.org/ore/terms/Aggregation"
     },
     "ore:proxies": {
-      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn",
+      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn"
     }
   }
 }
