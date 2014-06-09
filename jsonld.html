@@ -562,9 +562,9 @@ can be described between the corresponding proxies:
 Other kinds of <em>provenance of a proxy</em> (e.g. who aggregated the given resource)
 MAY be stated using vocabularies like 
 <a href="http://www.w3.org/TR/prov-o/">PROV-O</a> 
-and <a href="http://purl.org/pav/html">PAV</a>. The example below says that Stian 
-aggregated document-1 (e.g. created its proxy in this aggregation) on the 
-17th of May 2014:
+and <a href="http://purl.org/pav/html">PAV</a>. The example below says that Matthew 
+aggregated <code>document-1</code> (e.g. created its proxy in this aggregation) 
+on the 17th of May 2014 (without necessarily creating document-1 itself):
 
 <pre>
 { "@context": [
@@ -587,8 +587,8 @@ aggregated document-1 (e.g. created its proxy in this aggregation) on the
                 "proxyFor": "http://example.com/document-1" 
 <strong>
                 "prov:attributedTo": {
-                    "@id": "http://orcid.org/0000-0001-9842-9718",
-                    "foaf:name": "Stian Soiland-Reyes"
+                    "@id": "http://orcid.org/0000-0003-4913-1485",
+                    "foaf:name": "Matthew Gamble"
                 },
                 "prov:generatedAtTime": { 
                     "@value": "2014-05-17T14:00:00Z"
