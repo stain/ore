@@ -564,14 +564,16 @@ MAY be stated using vocabularies like
 <a href="http://www.w3.org/TR/prov-o/">PROV-O</a> 
 and <a href="http://purl.org/pav/html">PAV</a>. The example below says that Matthew 
 aggregated <code>document-1</code> (e.g. created its proxy in this aggregation) 
-on the 17th of May 2014 (without necessarily creating document-1 itself):
+on the 17th of May 2014 (without necessarily creating document-1):
 
 <pre>
 { "@context": [
     "https://w3id.org/ore/context",
     { 
       "foaf": "http://xmlns.com/foaf/0.1/",
-      "prov": "http://www.w3.org/ns/prov#"
+      "prov": "http://www.w3.org/ns/prov#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "prov:generatedAtTime": { "@type": "xsd:dateTime" }
     }
   ],
   "@type": "ResourceMap",
@@ -590,10 +592,7 @@ on the 17th of May 2014 (without necessarily creating document-1 itself):
                         "@id": "http://orcid.org/0000-0003-4913-1485",
                         "foaf:name": "Matthew Gamble"
                     },
-                    "prov:generatedAtTime": { 
-                        "@value": "2014-05-17T14:00:00Z",
-                        "@type": "xsd:dateTime"
-                    }
+                    "prov:generatedAtTime": "2014-05-17T14:00:00Z"
 </strong>                
                   }
       ]
