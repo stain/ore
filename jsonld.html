@@ -282,6 +282,7 @@ in which case it MUST indicate which <code>Aggregation</code> it <code>describes
 { "@context": "https://w3id.org/ore/context",
   <strong>
   "@type": "ResourceMap",
+  "@id": "",
   "describes": {
       "@id": "http://example.com/aggregation-1",
       "@type": "Aggregation"
@@ -289,6 +290,10 @@ in which case it MUST indicate which <code>Aggregation</code> it <code>describes
   </strong>
 }
 </pre>
+
+The Aggregation MUST have an <code>@id</code> to identify it; this URI SHOULD be absolute.
+The ResourceMap MAY have an identifier using <code>@id</code>, which MUST be different from 
+the Aggregation URI.
 
 
 <h4>isDescribedBy</h4>
@@ -328,7 +333,7 @@ resource, like a journal article identified with a DOI, then this MAY be indicat
       "@id": "http://example.com/aggregation-1",
       "@type": "Aggregation",
       <strong>
-      "similarTo": "http://dx.doi.org/10.1016/1.2.3"
+      "similarTo": "http://dx.doi.org/10.1002/cpe.1594"
       </strong>
   }
 }
@@ -704,11 +709,13 @@ a <em>proxy for document-1 within aggregation-3</em>). </code> <code>data-2</cod
 known to be aggregated by <code>aggregation-2</code>. aggregation-3 is itself an aggregation
 with its own resource maps and proxies, but they are not detailed fully here (except
 for the aggregated external proxy). Finally the aggregation has its own set of
-identified proxies, one for each aggregated resource. 
+identified proxies, one for each aggregated resource. Here, the lineage of 
+data-2's aggregation is shown to be originating from aggregation-2.
 
 
 <pre>
 { "@context": "https://w3id.org/ore/context",
+  "@id": ""
   "@type": "ResourceMap",
   "describes": {
       "@id": "http://example.com/aggregation-1",
@@ -730,7 +737,7 @@ identified proxies, one for each aggregated resource.
             "@type": "Aggregation",
             "isDescribedBy": [ "http://other.example.org/aggregation-3.rdf",
                                "http://other.example.org/aggregation-3.jsonld" ]
-          }          
+          },       
           { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
             "@type": "Proxy",
             "proxyFor": "http://example.com/document-1",
@@ -740,20 +747,88 @@ identified proxies, one for each aggregated resource.
       "proxies": [
               { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
                 "@type": "Proxy",
-                "proxyFor": "http://example.com/document-1" },
+                "proxyFor": "http://example.com/document-1" 
+              },
               { "@id": "urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751",
                 "@type": "Proxy",
-                "proxyFor": "http://other.example.org/data-2" },
+                "proxyFor": "http://other.example.org/data-2",
+                "lineage": {
+                   "@id": "urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66",
+                   "@type": "Proxy",
+                   "proxyFor": "http://other.example.org/data-2",
+                   "proxyIn": "http://other.example.org/aggregation-2" } 
+              },
               { "@id": "urn:uuid:c0f5f1ad-5269-4cfc-b9f5-e9621c499f53",
                 "@type": "Proxy",
-                "proxyFor": "http://other.example.org/aggregation-3" },
+                "proxyFor": "http://other.example.org/aggregation-3" 
+              },
               { "@id": "urn:uuid:318745e0-5ea4-4a68-8a0a-ab27ab96985a",
                 "@type": "Proxy",
-                "proxyFor": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602" }
-      ]
+                "proxyFor": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602" 
+              }
+      ],
+      "similarTo": "http://dx.doi.org/10.1002/cpe.1594"
   }
 }
 </pre>
+
+If processed with the <a href="#context">ORE JSON-LD context</a>, the following triples are expressed:
+
+<pre>
+<> <http://www.openarchives.org/ore/terms/describes> <http://example.com/aggregation-1> .
+<> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/ResourceMap> .
+
+<http://example.com/aggregation-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Aggregation> .
+<http://example.com/aggregation-1> <http://www.openarchives.org/ore/terms/isDescribedBy> <http://example.com/aggregation-1.jsonld> .
+<http://example.com/aggregation-1> <http://www.openarchives.org/ore/terms/isDescribedBy> <http://example.com/aggregation-1.rdf> .
+<http://example.com/aggregation-1> <http://www.openarchives.org/ore/terms/similarTo> "http://dx.doi.org/10.1002/cpe.1594" .
+
+<http://example.com/aggregation-1> <http://www.openarchives.org/ore/terms/aggregates> <http://example.com/document-1> .
+<http://example.com/aggregation-1> <http://www.openarchives.org/ore/terms/aggregates> <http://other.example.org/aggregation-3> .
+<http://example.com/aggregation-1> <http://www.openarchives.org/ore/terms/aggregates> <http://other.example.org/data-2> .
+<http://example.com/aggregation-1> <http://www.openarchives.org/ore/terms/aggregates> <urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602> .
+
+<http://other.example.org/data-2> <http://www.openarchives.org/ore/terms/isAggregatedBy> <http://other.example.org/aggregation-2> .
+
+<http://other.example.org/aggregation-2> <http://www.openarchives.org/ore/terms/isDescribedBy> <http://other.example.org/aggregation-2.rdf> .
+<http://other.example.org/aggregation-2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Aggregation> .
+
+<http://other.example.org/aggregation-3> <http://www.openarchives.org/ore/terms/isDescribedBy> <http://other.example.org/aggregation-3.jsonld> .
+<http://other.example.org/aggregation-3> <http://www.openarchives.org/ore/terms/isDescribedBy> <http://other.example.org/aggregation-3.rdf> .
+<http://other.example.org/aggregation-3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Aggregation> .
+
+
+<urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Proxy> .
+<urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2> <http://www.openarchives.org/ore/terms/proxyFor> <http://example.com/document-1> .
+<urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2> <http://www.openarchives.org/ore/terms/proxyIn> <http://example.com/aggregation-1> .
+
+
+<urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Proxy> .
+<urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751> <http://www.openarchives.org/ore/terms/proxyFor> <http://other.example.org/data-2> .
+<urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751> <http://www.openarchives.org/ore/terms/proxyIn> <http://example.com/aggregation-1> .
+<urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751> <http://www.openarchives.org/ore/terms/lineage> <urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66> .
+
+<urn:uuid:c0f5f1ad-5269-4cfc-b9f5-e9621c499f53> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Proxy> .
+<urn:uuid:c0f5f1ad-5269-4cfc-b9f5-e9621c499f53> <http://www.openarchives.org/ore/terms/proxyFor> <http://other.example.org/aggregation-3> .
+<urn:uuid:c0f5f1ad-5269-4cfc-b9f5-e9621c499f53> <http://www.openarchives.org/ore/terms/proxyIn> <http://example.com/aggregation-1> .
+
+<urn:uuid:318745e0-5ea4-4a68-8a0a-ab27ab96985a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Proxy> .
+<urn:uuid:318745e0-5ea4-4a68-8a0a-ab27ab96985a> <http://www.openarchives.org/ore/terms/proxyFor> <urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602> .
+<urn:uuid:318745e0-5ea4-4a68-8a0a-ab27ab96985a> <http://www.openarchives.org/ore/terms/proxyIn> <http://example.com/aggregation-1> .
+
+
+<urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Proxy> .
+<urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66> <http://www.openarchives.org/ore/terms/proxyFor> <http://other.example.org/data-2> .
+<urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66> <http://www.openarchives.org/ore/terms/proxyIn> <http://other.example.org/aggregation-2> .
+
+<urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.openarchives.org/ore/terms/Proxy> .
+<urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602> <http://www.openarchives.org/ore/terms/proxyFor> <http://example.com/document-1> .
+<urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602> <http://www.openarchives.org/ore/terms/proxyIn> <http://other.example.org/aggregation-3> .
+
+    
+</pre>
+
+
 
 <h2 id="frame">4. ORE JSON-LD frame</h2>
 
