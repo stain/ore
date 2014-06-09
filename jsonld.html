@@ -571,7 +571,7 @@ on the 17th of May 2014 (without necessarily creating document-1 itself):
     "https://w3id.org/ore/context",
     { 
       "foaf": "http://xmlns.com/foaf/0.1/",
-      "prov": "http://www.w3.org/ns/prov#",
+      "prov": "http://www.w3.org/ns/prov#"
     }
   ],
   "@type": "ResourceMap",
@@ -579,25 +579,27 @@ on the 17th of May 2014 (without necessarily creating document-1 itself):
       "@id": "http://example.com/aggregation-1",
       "@type": "Aggregation",
       "aggregates": [
-          "http://example.com/document-1",
+          "http://example.com/document-1"
       ],
       "proxies": [
-              { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
-                "@type": "Proxy",
-                "proxyFor": "http://example.com/document-1" 
+                  { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+                    "@type": "Proxy",
+                    "proxyFor": "http://example.com/document-1",
 <strong>
-                "prov:attributedTo": {
-                    "@id": "http://orcid.org/0000-0003-4913-1485",
-                    "foaf:name": "Matthew Gamble"
-                },
-                "prov:generatedAtTime": { 
-                    "@value": "2014-05-17T14:00:00Z"
-                    "@type": "xsd:dateTime"
+                    "prov:attributedTo": {
+                        "@id": "http://orcid.org/0000-0003-4913-1485",
+                        "foaf:name": "Matthew Gamble"
+                    },
+                    "prov:generatedAtTime": { 
+                        "@value": "2014-05-17T14:00:00Z",
+                        "@type": "xsd:dateTime"
+                    }
 </strong>                
-                }
+                  }
       ]
   }
 }
+   
 </pre>
 
 </div>
