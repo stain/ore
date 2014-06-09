@@ -54,7 +54,7 @@
 </div>
 <div id="titleBlock">
   <h2 class="title">ORE User Guide - Resource Map Implementation in JSON-LD</h2>
-  <h3 class="subTitle">Editors draft, 2014-06-05</h3>
+  <h3 class="subTitle">Editors draft, 2014-06-09</h3>
 </div><!--div-titleBlock-->
 <dl class="draft">
   <dt>This version:</dt>
@@ -408,9 +408,14 @@ It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
 
 <h4>proxies, proxyFor, proxyIn</h4>
 
-<div class="TODO">Describe proxies</div>
+<p>
+<a href="http://www.openarchives.org/ore/1.0/vocabulary#proxy">Proxies</a> 
+represents an <code>AggregatedResource</code> as it exists in a specific <code>Aggregation</code>.
+To indicate the <a href="">proxies</a> , use
+<code>proxies</code> and <code>proxyFor</code>:
+</p>
 
-<pre class="draft">
+<pre>
 { "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
   "describes": {
@@ -430,9 +435,11 @@ It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
 }
 </pre>
 
-<code>proxyIn</code> SHOULD NOT be provided for proxies listed under
-<code>proxies</code>,  but when aggregating a <code>Proxy</code> from a
-different aggregation, it MUST specify <code>proxyIn</code>: 
+<p>The resource described by <code>proxyFor</code> MUST be listed under <code>aggregates</code>.</p>
+
+<p>Note that <code>proxyIn</code> SHOULD NOT be provided for proxies listed under
+<code>proxies</code>; however in the special case of <em>aggregating 
+a proxy</em> (from a different aggregation), it MUST specify <code>proxyIn</code>: </p>
 
 <pre>
 { "@context": "https://w3id.org/ore/context",
@@ -451,8 +458,9 @@ different aggregation, it MUST specify <code>proxyIn</code>:
 }
 </pre>
 
-These proxies MUST NOT be listed under <code>proxies</code> as a proxy can
-only be <code>proxyFor</code> for a single <code>Aggregation</code>.
+Such "external" proxies MUST NOT be listed under <code>proxies</code> as a proxy can
+only be <code>proxyFor</code> for a single <code>Aggregation</code>, and an 
+aggregation SHOULD NOT aggregate its own proxies.
 
 <h2 id="context">3. ORE JSON-LD context</h2>
 
