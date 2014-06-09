@@ -376,7 +376,7 @@ additional <a href="http://www.w3.org/TR/json-ld/#the-context"><code>@context</c
 
 </pre>
 
-<h4>isAggregatedBy</h4>
+<h4>isAggregatedBy, isDescribedBy</h4>
 If a resource is also part of a <em>different</em> <code>Aggregation</code>,
 then this can be indicated with <code>isAggregatedBy</code>:
 
@@ -402,7 +402,8 @@ then this can be indicated with <code>isAggregatedBy</code>:
 
 <p>
 It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
-<code>Aggregation</code>, but one MAY describe its <code>isDescribedBy</code>.
+<code>Aggregation</code>, but one MAY use <code>isDescribedBy</code> to indicate
+its <code>ResourceMap</code> representations.
 </p>
 
 
