@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.1//EN"
     "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
     version="XHTML+RDFa 1.1"
     xmlns:pav="http://purl.org/pav/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -15,24 +15,24 @@
         <link rel="shortcut icon" href="http://www.openarchives.org/ore/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="http://www.openarchives.org/ore/1.0/ore-spec.css" type="text/css" />
         <style type="text/css">
-        .TODO:before { 
+        .TODO:before {
                 content: "TODO: ";
                 font-weight: bold;
         }
-        .TODO { 
+        .TODO {
                 display: block;
                 background: #ee6;
                 border: 1px dashed #444;
                 padding: 0.4em;
 
         }
-        .draft:before { 
+        .draft:before {
                 content: "(Subject to change)";
                 font-style: italic;
                 margin-bottom: 1em;
                 display: block;
         }
-        .draft { 
+        .draft {
                 color: #555;
                 border: 3pt dashed #444;
                 padding-top: 1em;
@@ -72,12 +72,12 @@
 </dl>
 <dl class="EditorsContributors">
   <dt>Editors</dt>
-  <dd><a property="pav:authoredBy" href="http://orcid.org/0000-0001-9842-9718">Stian Soiland-Reyes</a>, 
+  <dd><a property="pav:authoredBy" href="http://orcid.org/0000-0001-9842-9718">Stian Soiland-Reyes</a>,
           <a href="http://www.cs.manchester.ac.uk/">University of Manchester</a></dd>
   <dt>Contributors</dt>
-  <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0002-9260-0753">Oscar Corcho</a>, 
+  <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0002-9260-0753">Oscar Corcho</a>,
           <a href="http://www.oeg-upm.net/">Universidad Politecnica de Madrid</a></dd>
-  <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0003-4913-1485">Matthew Gamble</a>, 
+  <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0003-4913-1485">Matthew Gamble</a>,
           <a href="http://www.cs.manchester.ac.uk/">University of Manchester</a></dd>
 </dl>
 
@@ -102,11 +102,11 @@ between these and other resources).</p>
 <p>Since a Resource Map is an RDF
 Graph, it can be serialized using any RDF syntax.  This document
 outlines the use of one such syntax for the serialization of Resource
-Maps: <a href="http://json-ld.org/">JSON-LD</a>. Two companion document 
-[<a href="http://www.openarchives.org/ore/1.0/rdfa">ORE RDFa</a>]       and 
+Maps: <a href="http://json-ld.org/">JSON-LD</a>. Two companion document
+[<a href="http://www.openarchives.org/ore/1.0/rdfa">ORE RDFa</a>]       and
 [<a href="www.openarchives.org/ore/1.0/rdfxml">ORE RDF/XML</a>]
-outline the serialization of Resource Maps in 
-[<a href="http://www.w3.org/TR/rdfa-syntax/">RDFa Syntax</a>] and 
+outline the serialization of Resource Maps in
+[<a href="http://www.w3.org/TR/rdfa-syntax/">RDFa Syntax</a>] and
 [<a href="http://www.w3.org/TR/rdf-syntax-grammar/">RDF/XML syntax</a>].</p>
 
 <p>This document is intended for implementers who have an understanding of ORE concepts
@@ -155,7 +155,7 @@ properties and types.
 JSON-LD allows for several equivalent representations of the same graph
 triples, and a compliant ORE JSON-LD document might therefore not follow the
 JSON structure exactly as listed in the examples of this document.
-See the <a href="framing">framing section</a> for measures to 
+See the <a href="framing">framing section</a> for measures to
 shape an ORE JSON-LD document into a predictable JSON structure.
 </p>
 
@@ -164,7 +164,7 @@ shape an ORE JSON-LD document into a predictable JSON structure.
 <p>The keywords &quot;MUST&quot;, &quot;MUST NOT&quot;,
 &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
 &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;,
-&quot;NOT RECOMMENDED&quot;, 
+&quot;NOT RECOMMENDED&quot;,
 &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
 interpreted as described in RFC 2119
 [<cite><a href="#RFC2119">IETF RFC 2119</a></cite>].</p>
@@ -230,7 +230,7 @@ without any special measures.
 
   <h3>1.3 <a id="Conformance" name="Conformance">Conformance</a></h3>
 
-  <p>The Internet Media Type (MIME type) for JSON-LD is 
+  <p>The Internet Media Type (MIME type) for JSON-LD is
   <a href="http://www.w3.org/TR/json-ld/#application-ld-json"><code>application/ld+json</code></a>.
 Where JSON-LD is used to provide representations of ORE Resource Maps, that
 media type SHOULD be used. For backwards compatibility, the JSON-LD
@@ -248,8 +248,8 @@ supported by conformant JSON-LD parsers.</p>
 <h2 id="syntax">2. Overview of ORE in JSON-LD syntax</h2>
 
 <p>
-An ORE Resource Map expressed as a JSON-LD resource MUST be valid 
-<a href="https://www.ietf.org/rfc/rfc4627">JSON</a>, and 
+An ORE Resource Map expressed as a JSON-LD resource MUST be valid
+<a href="https://www.ietf.org/rfc/rfc4627">JSON</a>, and
 MUST be valid <a href="http://www.w3.org/TR/json-ld/">JSON-LD</a>.
 </p>
 
@@ -257,10 +257,10 @@ MUST be valid <a href="http://www.w3.org/TR/json-ld/">JSON-LD</a>.
 <p>
 An ORE JSON-LD resource MUST define a JSON-LD <code>@context</code>,
 which SHOULD be <code>"https://w3id.org/ore/context"</code>
-(see <a href="#context">ORE JSON-LD context</a> below). 
+(see <a href="#context">ORE JSON-LD context</a> below).
 </p>
 <p class="draft">
-The <code>@type</code> SHOULD be provided for ORE resources of type 
+The <code>@type</code> SHOULD be provided for ORE resources of type
 <code>Aggregation</code>,
 <code>ResourceMap</code>,
 <code>Proxy</code>, and MAY be provided for resources of type
@@ -270,7 +270,7 @@ The <code>@type</code> SHOULD be provided for ORE resources of type
 <h4>ResourceMap, describes, Aggregation</h4>
 <p>
 The <code>ResourceMap</code> SHOULD be the top-level JSON object
-(indicating that the JSON-LD document <em>is</em> the resource map), 
+(indicating that the JSON-LD document <em>is</em> the resource map),
 in which case it MUST indicate which <code>Aggregation</code> it <code>describes</code>:
 </p>
 
@@ -288,7 +288,7 @@ in which case it MUST indicate which <code>Aggregation</code> it <code>describes
 
 
 <h4>isDescribedBy</h4>
-The <code>Aggregation</code> MAY list other resource maps it <code>isDescribedBy</code>, 
+The <code>Aggregation</code> MAY list other resource maps it <code>isDescribedBy</code>,
 which SHOULD be given as a JSON list of URIs:
 
 <pre>
@@ -337,14 +337,14 @@ for instance, to indicate their <code>@type</code> of
 <code>dcterms:Dataset</code> (see above).
 
 The example below shows how to to indicate the provenance of an aggregated resource using
-<a href="http://www.w3.org/TR/prov-o/">PROV-O</a> and <a href="http://purl.org/pav/html">PAV</a>. 
+<a href="http://www.w3.org/TR/prov-o/">PROV-O</a> and <a href="http://purl.org/pav/html">PAV</a>.
 When using third-party vocabularies it may be desired to add prefixes using
 additional <a href="http://www.w3.org/TR/json-ld/#the-context"><code>@context</code></a>(s):
 
 <pre>
 { "@context": [
     "https://w3id.org/ore/context",
-    { 
+    {
       "foaf": "http://xmlns.com/foaf/0.1/",
       "schema": "http://schema.org/",
       "prov": "http://www.w3.org/ns/prov#",
@@ -360,13 +360,13 @@ additional <a href="http://www.w3.org/TR/json-ld/#the-context"><code>@context</c
           {  "@id": "http://example.com/blog/",
           <strong>
              "@type": "schema:BlogPosting",
-             "prov:wasDerivedFrom": { 
-                 "@id": "http://example.com/document-1" 
+             "prov:wasDerivedFrom": {
+                 "@id": "http://example.com/document-1"
              },
              "pav:authoredBy": {
                 "@id": "http://orcid.org/0000-0001-9842-9718",
                 "foaf:name": "Stian Soiland-Reyes"
-             } 
+             }
           </strong>
           }
       ]
@@ -389,7 +389,7 @@ then this can be indicated with <code>isAggregatedBy</code>:
       "aggregates": [
           { "@id": "http://other.example.org/data-2",
           <strong>
-            "isAggregatedBy": { 
+            "isAggregatedBy": {
                 "@id": "http://other.example.org/aggregation-2",
                 "@type": "Aggregation"
             }
@@ -432,7 +432,7 @@ It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
 
 <code>proxyIn</code> SHOULD NOT be provided for proxies listed under
 <code>proxies</code>,  but when aggregating a <code>Proxy</code> from a
-different aggregation, it MUST specify <code>proxyIn</code>: 
+different aggregation, it MUST specify <code>proxyIn</code>:
 
 <pre>
 { "@context": "https://w3id.org/ore/context",
@@ -459,7 +459,7 @@ only be <code>proxyFor</code> for a single <code>Aggregation</code>.
 <p>
 An <a href="http://www.w3.org/TR/json-ld/#the-context">JSON-LD context</a>
 defines how to understand identifiers in a JSON-LD document.
-The <a href="context.json">ORE context</a> thus defines how to 
+The <a href="context.json">ORE context</a> thus defines how to
 interpret documents according to the <a href="#syntax">ORE
 JSON-LD syntax</a> as defined above. This allows
 these documents to be be processed using <a
@@ -478,13 +478,13 @@ convert to other RDF formats.
             "...": ""
           }
         </pre>
-        
+
 
 </div>
 
         <div class="draft">
                 An alternative context is available at
-        <a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>, 
+        <a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>,
         which defines ORE terms with the <code>ore:</code> prefix. This context MAY be used instead,
         for instance to avoid naming conflicts when including the ORE context in another JSON-LD context
 </div>
@@ -539,7 +539,7 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
       "@type" : "@id"
     },
     "proxies": {
-      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn",
+      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn"
     }
   }
 }
@@ -569,7 +569,7 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
       "aggregates": [
           { "@id": "http://example.com/document-1" },
           { "@id": "http://other.example.org/data-2",
-            "isAggregatedBy": { 
+            "isAggregatedBy": {
                 "@id": "http://other.example.org/aggregation-2",
                 "@type": "Aggregation"
             }
@@ -677,30 +677,30 @@ World Wide Web Consortium, 15 January 2004.</dd>
 <div class="body">
 <h2><a name="acknowledgments" id="acknowledgments"></a>A. Acknowledgements</h2>
 <p>This document is the work of the
-<a href="http://openarchives.org">Open Archives Initiative</a>. Funding 
-for Open Archives Initiative Object Reuse and Exchange is provided by 
+<a href="http://openarchives.org">Open Archives Initiative</a>. Funding
+for Open Archives Initiative Object Reuse and Exchange is provided by
 the <a href="http://mellon.org/">Andrew W. Mellon Foundation</a>,
 <a href="http://microsoft.com/">Microsoft</a>, and the
-<a href="http://nsf.gov">National Science Foundation</a>.&nbsp; Additional 
-support is provided by the <a href="http://www.cni.org">Coalition for 
+<a href="http://nsf.gov">National Science Foundation</a>.&nbsp; Additional
+support is provided by the <a href="http://www.cni.org">Coalition for
 Networked Information</a>.</p>
 <!--
 <p>This document is based on meetings of the
 <a href="http://www.openarchives.org/ore/ORE_Community.php#OAI-ORE_Technical_Committee">
 OAI-ORE Technical Committee</a> (ORE-TC), with participation from the
 <a href="http://www.openarchives.org/ore/ORE_Community.php#OAI-ORE_Liaison_Group">
-OAI-ORE Liaison Group</a> (ORE-LG).&nbsp; Members of the ORE-TC are: 
-Chris Bizer (Freie Universit&#228;t Berlin), Les Carr (University of Southampton), Tim DiLauro 
-(Johns Hopkins University), Leigh Dodds (Ingenta), David Fulker (UCAR), Tony Hammond 
-(Nature Publishing Group), Pete Johnston (Eduserv Foundation), Richard 
-Jones (Imperial College), Peter Murray (OhioLINK), Michael Nelson (Old 
-Dominion University), Ray Plante (NCSA and National Virtual 
-Observatory), Rob Sanderson (University of Liverpool), Simeon Warner 
-(Cornell University), and Jeff Young (OCLC).&nbsp; Members of ORE-LG are: 
-Leonardo Candela (DRIVER), Tim Cole (DLF Aquifer and UIUC Library), 
-Julie Allinson (JISC), Jane Hunter (DEST), Savas Parastatidis&nbsp; 
-(Microsoft), Sandy Payette (Fedora Commons), Thomas Place (DARE and 
-University of Tilburg), Andy Powell (DCMI), and Robert Tansley (Google, 
+OAI-ORE Liaison Group</a> (ORE-LG).&nbsp; Members of the ORE-TC are:
+Chris Bizer (Freie Universit&#228;t Berlin), Les Carr (University of Southampton), Tim DiLauro
+(Johns Hopkins University), Leigh Dodds (Ingenta), David Fulker (UCAR), Tony Hammond
+(Nature Publishing Group), Pete Johnston (Eduserv Foundation), Richard
+Jones (Imperial College), Peter Murray (OhioLINK), Michael Nelson (Old
+Dominion University), Ray Plante (NCSA and National Virtual
+Observatory), Rob Sanderson (University of Liverpool), Simeon Warner
+(Cornell University), and Jeff Young (OCLC).&nbsp; Members of ORE-LG are:
+Leonardo Candela (DRIVER), Tim Cole (DLF Aquifer and UIUC Library),
+Julie Allinson (JISC), Jane Hunter (DEST), Savas Parastatidis&nbsp;
+(Microsoft), Sandy Payette (Fedora Commons), Thomas Place (DARE and
+University of Tilburg), Andy Powell (DCMI), and Robert Tansley (Google,
 Inc. and DSpace)</p>
 <p>We also acknowledge comments from the
 <a href="http://www.openarchives.org/ore/ORE_Community.php#OAI-ORE_Advisory_Committee">
