@@ -456,7 +456,7 @@ and SHOULD specify at least one <code>isDescribedBy</code>:
           <strong>
             "@type": "Aggregation",
             "isDescribedBy": [ "http://other.example.org/aggregation-2.rdf",
-                               "http://other.example.org/aggregation-2.jsonld""]
+                               "http://other.example.org/aggregation-2.jsonld" ]
           </strong>
           }
       ]
@@ -696,7 +696,64 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
 </pre>
 
 
+<h2 id="complete">Complete example</h2>
+The following complete example shows a ResourceMap describing <code>aggregation-1</code> 
+containing 4 resources (<code>document-1</code>, 
+<code>data-2</code>,  <code>aggregation-3</code> and 
+a <em>proxy for document-1 within aggregation-3</em>). </code> <code>data-2</code> is also
+known to be aggregated by <code>aggregation-2</code>. aggregation-3 is itself an aggregation
+with its own resource maps and proxies, but they are not detailed fully here (except
+for the aggregated external proxy). Finally the aggregation has its own set of
+identified proxies, one for each aggregated resource. 
 
+
+<pre>
+{ "@context": "https://w3id.org/ore/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      "isDescribedBy": [
+          "http://example.com/aggregation-1.rdf",
+          "http://example.com/aggregation-1.jsonld"
+      ],
+      "aggregates": [
+          "http://example.com/document-1",
+          { "@id": "http://other.example.org/data-2",
+            "isAggregatedBy": { 
+                "@id": "http://other.example.org/aggregation-2",
+                "@type": "Aggregation",
+                "isDescribedBy": "http://other.example.org/aggregation-2.rdf"
+            }
+          },
+          { "@id": "http://other.example.org/aggregation-3",
+            "@type": "Aggregation",
+            "isDescribedBy": [ "http://other.example.org/aggregation-3.rdf",
+                               "http://other.example.org/aggregation-3.jsonld" ]
+          }          
+          { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+            "@type": "Proxy",
+            "proxyFor": "http://example.com/document-1",
+            "proxyIn": "http://other.example.org/aggregation-3"
+          }
+      ],
+      "proxies": [
+              { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+                "@type": "Proxy",
+                "proxyFor": "http://example.com/document-1" },
+              { "@id": "urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751",
+                "@type": "Proxy",
+                "proxyFor": "http://other.example.org/data-2" },
+              { "@id": "urn:uuid:c0f5f1ad-5269-4cfc-b9f5-e9621c499f53",
+                "@type": "Proxy",
+                "proxyFor": "http://other.example.org/aggregation-3" },
+              { "@id": "urn:uuid:318745e0-5ea4-4a68-8a0a-ab27ab96985a",
+                "@type": "Proxy",
+                "proxyFor": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602" }
+      ]
+  }
+}
+</pre>
 
 <h2 id="frame">4. ORE JSON-LD frame</h2>
 
