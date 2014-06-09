@@ -492,10 +492,51 @@ a proxy</em> (from a different aggregation), it MUST specify <code>proxyIn</code
   }
 }
 </pre>
-
+<p>
 Such "external" proxies MUST NOT be listed under <code>proxies</code> as a proxy can
 only be <code>proxyFor</code> for a single <code>Aggregation</code>, and an 
-aggregation SHOULD NOT aggregate its own proxies.
+aggregation SHOULD NOT aggregate its own proxies. The <code>proxyIn</code> 
+MAY be expanded to a JSON Object with <code>@id</code> and <code>"@type": "Aggregation"</code> 
+to provide <code>isDescribedBy</code> .
+</p>
+
+<h4 id="lineage">lineage</h4>
+<p>
+If an aggregated resource was discovered in a different aggregation, this 
+<a href="http://www.openarchives.org/ore/1.0/vocabulary#lineage">lineage</a>
+can be described between the corresponding proxies:
+</p>
+
+
+<pre>
+{ "@context": "https://w3id.org/ore/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      "aggregates": [
+          { "@id": "http://example.com/document-1" },
+      ],
+      <strong>
+      "proxies": [
+              { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+                "@type": "Proxy",
+                "proxyFor": "http://example.com/document-1"
+                <strong>
+                "lineage" {
+                    "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+                    "@type": "Proxy",
+                    "proxyFor": http://example.com/document-1",
+                    "proxyIn": "http://other.example.org/aggregation-3"
+                }
+                </strong>
+      ]
+      </strong>
+  }
+}
+</pre>
+
+
 
 <h2 id="context">3. ORE JSON-LD context</h2>
 
