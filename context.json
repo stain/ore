@@ -45,7 +45,7 @@
       "@type" : "@id"
     },
     "proxies": {
-      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn",
+      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn"
     }
   }
 }
