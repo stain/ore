@@ -832,49 +832,162 @@ If processed with the <a href="#context">ORE JSON-LD context</a>, the following 
 
 <h2 id="frame">4. ORE JSON-LD frame</h2>
 
-<div class="TODO">
-        Define a <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-LD Frame</a> for structuring
-        an ORE JSON-LD document according to this structure:
-</div>
-
-<p class="draft">
-By processing an ORE JSON-LD document using this <a href="frame.jsonld">Frame</a>, a predictable
-JSON structure is returned that can be used by consumers without requiring any further
-JSON-LD knowledge.
+<p>
+    JSON-LD, as all RDF serialization, allow many degrees of freedom for representing the same RDF graph. Thus, 
+    an ORE manifest could appear in other JSON structures than the one defined in this document. This could 
+    particularly be the case if converting an ORE manifest to JSON-LD using regular RDF libraries.
+</p>
+<p>
+    By facilitating <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-LD Framing</a> with
+    the  <a href="frame.jsonld">ORE JSON-LD Frame</a>, followed by
+    <a href="http://www.w3.org/TR/json-ld-api/#compaction-algorithms">JSON-LD Compaction</a>, 
+    a predictable JSON structure is returned that can be used by consumers without
+    requiring any further JSON-LD knowledge.
 </p>
 
-<a href="framed-example.json">framed-example.json</a>:
-<pre class="draft">
-{ "@context": "https://w3id.org/ore/context",
-  "@type": "ResourceMap",
-  "describes": {
+<p>For example, say we have the following 'unstructured'' JSON-LD ORE manifest:
+</p>
+
+<pre>
+{
+  "@graph": [
+    {
       "@id": "http://example.com/aggregation-1",
-      "@type": "Aggregation",
-      "isDescribedBy": [
-          "http://example.com/aggregation-1.rdf",
-          "http://example.com/aggregation-1.jsonld"
+      "@type": "http://www.openarchives.org/ore/terms/Aggregation",
+      "http://www.openarchives.org/ore/terms/aggregates": [
+        {
+          "@id": "http://example.com/document-1"
+        },
+        {
+          "@id": "http://other.example.org/data-2"
+        },
+        {
+          "@id": "http://other.example.org/aggregation-3"
+        },
+        {
+          "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602"
+        }
       ],
-      "aggregates": [
-          { "@id": "http://example.com/document-1" },
-          { "@id": "http://other.example.org/data-2",
-            "isAggregatedBy": {
-                "@id": "http://other.example.org/aggregation-2",
-                "@type": "Aggregation"
-            }
-          },
-          { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
-            "@type": "Proxy",
-            "proxyFor": "http://example.com/document-1",
-            "proxyIn": "http://other.example.org/aggregation-3"
-          }
+      "http://www.openarchives.org/ore/terms/isDescribedBy": [
+        {
+          "@id": "http://example.com/aggregation-1.rdf"
+        },
+        {
+          "@id": "http://example.com/aggregation-1.jsonld"
+        }
       ],
-      "proxies": [
-              { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
-                "@type": "Proxy",
-                "proxyFor": "http://example.com/document-1" }
+      "http://www.openarchives.org/ore/terms/similarTo": {
+        "@id": "http://dx.doi.org/10.1002/cpe.1594"
+      }
+    },
+    {
+      "@id": "index.html",
+      "@type": "http://www.openarchives.org/ore/terms/ResourceMap",
+      "http://www.openarchives.org/ore/terms/describes": {
+        "@id": "http://example.com/aggregation-1"
+      }
+    },
+    {
+      "@id": "http://other.example.org/aggregation-2",
+      "@type": "http://www.openarchives.org/ore/terms/Aggregation",
+      "http://www.openarchives.org/ore/terms/isDescribedBy": {
+        "@id": "http://other.example.org/aggregation-2.rdf"
+      }
+    },
+    {
+      "@id": "http://other.example.org/aggregation-3",
+      "@type": "http://www.openarchives.org/ore/terms/Aggregation",
+      "http://www.openarchives.org/ore/terms/isDescribedBy": [
+        {
+          "@id": "http://other.example.org/aggregation-3.rdf"
+        },
+        {
+          "@id": "http://other.example.org/aggregation-3.jsonld"
+        }
       ]
-  }
-}
+    },
+    {
+      "@id": "http://other.example.org/data-2",
+      "http://www.openarchives.org/ore/terms/isAggregatedBy": {
+        "@id": "http://other.example.org/aggregation-2"
+      }
+    },
+    {
+      "@id": "urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751",
+      "@type": "http://www.openarchives.org/ore/terms/Proxy",
+      "http://www.openarchives.org/ore/terms/lineage": {
+        "@id": "urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66"
+      },
+      "http://www.openarchives.org/ore/terms/proxyFor": {
+        "@id": "http://other.example.org/data-2"
+      },
+      "http://www.openarchives.org/ore/terms/proxyIn": {
+        "@id": "http://example.com/aggregation-1"
+      }
+    },
+    {
+      "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+      "@type": "http://www.openarchives.org/ore/terms/Proxy",
+      "http://www.openarchives.org/ore/terms/proxyFor": {
+        "@id": "http://example.com/document-1"
+      },
+      "http://www.openarchives.org/ore/terms/proxyIn": {
+        "@id": "http://other.example.org/aggregation-3"
+      }
+    },
+    {
+      "@id": "urn:uuid:318745e0-5ea4-4a68-8a0a-ab27ab96985a",
+      "@type": "http://www.openarchives.org/ore/terms/Proxy",
+      "http://www.openarchives.org/ore/terms/proxyFor": {
+        "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602"
+      },
+      "http://www.openarchives.org/ore/terms/proxyIn": {
+        "@id": "http://example.com/aggregation-1"
+      }
+    },
+    {
+      "@id": "urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66",
+      "@type": "http://www.openarchives.org/ore/terms/Proxy",
+      "http://www.openarchives.org/ore/terms/proxyFor": {
+        "@id": "http://other.example.org/data-2"
+      },
+      "http://www.openarchives.org/ore/terms/proxyIn": {
+        "@id": "http://other.example.org/aggregation-2"
+      }
+    },
+    {
+      "@id": "urn:uuid:c0f5f1ad-5269-4cfc-b9f5-e9621c499f53",
+      "@type": "http://www.openarchives.org/ore/terms/Proxy",
+      "http://www.openarchives.org/ore/terms/proxyFor": {
+        "@id": "http://other.example.org/aggregation-3"
+      },
+      "http://www.openarchives.org/ore/terms/proxyIn": {
+        "@id": "http://example.com/aggregation-1"
+      }
+    },
+    {
+      "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+      "@type": "http://www.openarchives.org/ore/terms/Proxy",
+      "http://www.openarchives.org/ore/terms/proxyFor": {
+        "@id": "http://example.com/document-1"
+      },
+      "http://www.openarchives.org/ore/terms/proxyIn": {
+        "@id": "http://example.com/aggregation-1"
+      }
+    }
+  ]
+}    
+</pre>
+
+<p>
+    If we <em>expand</em> this JSON-LD document using <a href="context.json">https://w3id.org/ore/context</a>,
+    then <em>frame</em> it using <a href="frame.json">https://w3id.org/ore/frame</a>
+    with <em>compaction</em> using <a href="context.json">https://w3id.org/ore/context</a>, then
+    we get:
+</p>
+
+<pre>
+    
 </pre>
 
 <h2 id="references">5. References</h2>
