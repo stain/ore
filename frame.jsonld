@@ -1,12 +1,11 @@
-{ "@context": "https://w3id.org/ore/context",
+{ "@context": ["http://ns.taverna.org.uk/2014/test-cors/context.jsonld"
+              ],
                
-  "describes": {
-   "@type": "Aggregation",
-   "isDescribedBy": [""],
-   "aggregates": [
-     { "isAggregatedBy": {
-       "isDescribedBy": {}
-     }
+"describes": {
+  "@type": "Aggregation",   
+  "isDescribedBy": [{"@embed": false}],
+  "aggregates": [
+     { 
      }
    ]
   }
