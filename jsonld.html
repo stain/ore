@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
         <link rel="shortcut icon" href="http://www.openarchives.org/ore/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="http://www.openarchives.org/ore/1.0/ore-spec.css" type="text/css" />
-        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
         <style type="text/css">
         pre,code { 
             font-family: 'Consolas', 'Inconsolata', 'Monaco', monospace;
@@ -228,7 +228,7 @@ without any special measures.
    <tr>
     <td><span class="code">pav</span></td>
     <td><span class="code">http://purl.org/dc/pav/</span></td>
-    <td><a href="http://purl.org/pav/html">PAV</a> vocabulary</a></td>
+    <td><a href="http://purl.org/pav/html">PAV</a> vocabulary</td>
    </tr>
    <tr>
     <td><span class="code">foaf</span></td>
@@ -246,7 +246,7 @@ media type SHOULD be used. For backwards compatibility, the JSON-LD
 specification allows for the alternative content-type of
 <code>application/json</code>, in which case the
 <a href="http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld">JSON-LD context Link header</a>
-MUST be present.
+MUST be present.</p>
 
 <p> A consumer of ORE Resource Maps encoded in
 JSON-LD SHOULD support all of the syntactic conventions defined by
@@ -644,14 +644,11 @@ keyword at the top-level node of ORE JSON-LD documents:
 }
 </pre>
 
-
-</div>
-
-        <div class="draft">
-                An alternative context is available at
-        <a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>,
-        which defines ORE terms with the <code>ore:</code> prefix. This context MAY be used instead,
-        for instance to avoid naming conflicts when including the ORE context in another JSON-LD context.
+<div class="draft">
+An alternative context is available at
+<a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>,
+which defines ORE terms with the <code>ore:</code> prefix. This context MAY be used instead,
+for instance to avoid naming conflicts when including the ORE context in another JSON-LD context.
 </div>
 
 <p>
@@ -718,7 +715,7 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
 The following complete example shows a ResourceMap describing <code>aggregation-1</code> 
 containing 4 resources (<code>document-1</code>, 
 <code>data-2</code>,  <code>aggregation-3</code> and 
-a <em>proxy for document-1 within aggregation-3</em>). </code> <code>data-2</code> is also
+a <em>proxy for document-1 within aggregation-3</em>). <code>data-2</code> is also
 known to be aggregated by <code>aggregation-2</code>. aggregation-3 is itself an aggregation
 with its own resource maps and proxies, but they are not detailed fully here (except
 for the aggregated external proxy). Finally the aggregation has its own set of
@@ -1064,7 +1061,6 @@ Resource Identifiers (IRIs)</cite></a>, M. Duerst &amp; M. Suignard,
 IETF RFC3987, January 2005.</dd>
 
 </dl>
-</div>
 
 <div class="back">
 <!--START-INCLUDE=_acknowledgements.inc-->
