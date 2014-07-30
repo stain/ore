@@ -38,14 +38,17 @@
     },
     "aggregates" : {
       "@id" : "http://www.openarchives.org/ore/terms/aggregates",
-      "@type" : "@id"
+      "@type" : "@id",
+      "@container": "@set"
     },
     "isDescribedBy" : {
       "@id" : "http://www.openarchives.org/ore/terms/isDescribedBy",
-      "@type" : "@id"
+      "@type" : "@id",
+      "@container": "@set"
     },
     "proxies": {
-      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn"
+      "@reverse" : "http://www.openarchives.org/ore/terms/proxyIn",
+      "@container": "@set"
     }
   }
 }
