@@ -129,78 +129,86 @@ Generated with respec.js
   <h2>Table of Contents</h2>
   <ul class="toc" role="directory" id="respecContents">
     <li class="tocline">
-      <a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a>
+      <a href="#introduction">1. Introduction</a>
       <ul class="toc">
         <li class="tocline">
-          <a href="#notational_conventions" class="tocxref"><span class="secno">1.1 </span>Notational Conventions</a>
+          <a href="#notational_conventions">1.1 Notational Conventions</a>
         </li>
         <li class="tocline">
-          <a href="#namespaces" class="tocxref"><span class="secno">1.2 </span>Namespaces</a>
+          <a href="#namespaces">1.2 Namespaces</a>
         </li>
         <li class="tocline">
-          <a href="#conformance" class="tocxref"><span class="secno">1.3 </span>Conformance</a>
+          <a href="#conformance">1.3 Conformance</a>
         </li>
       </ul>
     </li>
     <li class="tocline">
-      <a href="#syntax" class="tocxref"><span class="secno">2. </span>Overview of ORE in JSON-LD syntax</a>
+      <a href="#syntax">2. Overview of ORE in JSON-LD syntax</a>
       <ul class="toc">
         <li class="tocline">
-          <a href="#aggregation" class="tocxref"><span class="secno">2.1 </span>ResourceMap, describes, Aggregation</a>
+          <a href="#aggregation">2.1 ResourceMap, describes, Aggregation</a>
         </li>
         <li class="tocline">
-          <a href="#isDescribedBy" class="tocxref"><span class="secno">2.2 </span>isDescribedBy</a>
+          <a href="#isDescribedBy">2.2 isDescribedBy</a>
         </li>
         <li class="tocline">
-          <a href="#similarTo" class="tocxref"><span class="secno">2.3 </span>similarTo</a>
+          <a href="#similarTo">2.3 similarTo</a>
         </li>
         <li class="tocline">
-          <a href="#aggregates" class="tocxref"><span class="secno">2.4 </span>aggregates</a>
+          <a href="#aggregates">2.4 aggregates</a>
         </li>
         <li class="tocline">
-          <a href="#isAggregatedBy" class="tocxref"><span class="secno">2.5 </span>isAggregatedBy, isDescribedBy</a>
+          <a href="#isAggregatedBy">2.5 isAggregatedBy, isDescribedBy</a>
         </li>
         <li class="tocline">
-          <a href="#proxies" class="tocxref"><span class="secno">2.6 </span>proxies, proxyFor, proxyIn</a>
+          <a href="#proxies">2.6 proxies, proxyFor, proxyIn</a>
         </li>
         <li class="tocline">
-          <a href="#provenance" class="tocxref"><span class="secno">2.7 </span>lineage and provenance of proxy</a>
+          <a href="#provenance">2.7 lineage and provenance of proxy</a>
         </li>
       </ul>
     </li>
     <li class="tocline">
-      <a href="#context" class="tocxref"><span class="secno">3. </span>ORE JSON-LD context</a>
+      <a href="#context">3. ORE JSON-LD context</a>
       <ul class="toc">
         <li class="tocline">
-          <a href="#additional-contexts" class="tocxref"><span class="secno">3.1 </span>Additional contexts</a>
+          <a href="#additional-contexts">3.1 Additional contexts</a>
         </li>
         <li class="tocline">
-          <a href="#context-content" class="tocxref"><span class="secno">3.2 </span>Content of ORE JSON-LD context</a>
+          <a href="#context-content">3.2 Content of ORE JSON-LD context</a>
         </li>
       </ul>
     </li>
     <li class="tocline">
-      <a href="#complete-example" class="tocxref"><span class="secno">4. </span>Complete example</a>
+      <a href="#complete-example">4. Complete example</a>
       <ul class="toc">
         <li class="tocline">
-          <a href="#example-jsonld" class="tocxref"><span class="secno">4.1 </span>Example JSON-LD</a>
+          <a href="#example-jsonld">4.1 Example JSON-LD</a>
         </li>
         <li class="tocline">
-          <a href="#example-triples" class="tocxref"><span class="secno">4.2 </span>Example triples</a>
+          <a href="#example-triples">4.2 Example triples</a>
         </li>
       </ul>
     </li>
     <li class="tocline">
-      <a href="#frame" class="tocxref"><span class="secno">5. </span>ORE JSON-LD frame</a>
+      <a href="#frame">5. ORE JSON-LD frame</a>
+      <ul class="toc">
+        <li class="tocline">
+          <a href="#example-framing">5.1 Example framing</a>
+        </li>
+        <li class="tocline">
+          <a href="#framing-proxies">5.2 Framing proxies</a>
+        </li>
+      </ul>
     </li>
     <li class="tocline">
-      <a href="#references" class="tocxref"><span class="secno">6. </span>References</a>
+      <a href="#references">6. References</a>
     </li>
     <li class="tocline">
-      <a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a>
+      <a href="#acknowledgements">A. Acknowledgements</a>
     </li>
     <li class="tocline">
-      <a href="#changelog" class="tocxref"><span class="secno">B. </span>Change Log</a>
+      <a href="#changelog">B. Change Log</a>
     </li>
   </ul>
 </section>
@@ -1326,8 +1334,8 @@ The <a href="frame.json">ORE JSON-LD frame</a> at time of writing is:
   </p>
 </section>
 
-<section id="proxy-framing">
-  <h3>Framing proxies</h3>
+<section id="framing-proxies">
+  <h3>5.2 Framing proxies</h3>
 <p>
   Note: <code>@reverse</code> properties like <code>proxies</code> is not
   yet commonly supported by JSON-LD Framing processors, and
