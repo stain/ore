@@ -16,10 +16,10 @@
         <link rel="stylesheet" href="http://www.openarchives.org/ore/1.0/ore-spec.css" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
         <style type="text/css">
-        pre,code { 
+        pre,code {
             font-family: 'Consolas', 'Inconsolata', 'Monaco', monospace;
         }
-        .TODO:before { 
+        .TODO:before {
                 content: "TODO: ";
                 font-weight: bold;
         }
@@ -78,7 +78,7 @@
   <dt>Editors</dt>
   <dd><a property="pav:authoredBy" href="http://orcid.org/0000-0001-9842-9718">Stian Soiland-Reyes</a>,
           <a href="http://www.cs.manchester.ac.uk/">University of Manchester</a></dd>
-  <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0003-4913-1485">Matthew Gamble</a>, 
+  <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0003-4913-1485">Matthew Gamble</a>,
           <a href="http://www.cs.manchester.ac.uk/">University of Manchester</a></dd>
   <dt>Contributors</dt>
   <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0002-9260-0753">Oscar Corcho</a>,
@@ -147,7 +147,7 @@ describes a <a href="http://www.ietf.org/rfc/rfc4627.txt">JSON</a>
 format for serializing RDF graphs.
 In short, the JSON-LD format allows the use of JSON Objects (maps/dictionaries)
 which represent an RDF resource. The  JSON-LD reserved keys <code>@id</code> define the
-IRI for the resource, and <code>@type</code> defines the rdf:type (class of the
+IRI for the resource, and <code>@type</code> defines the <code>rdf:type</code> (class of the
 resource). Other RDF properties are defined using additional keys on the
 resource, and can point to either other JSON Objects, JSON Lists (multiple
 property relations) or to plain JSON literals.  The JSON-LD <code>@context</code> can define
@@ -246,7 +246,8 @@ MUST be present.
 <p> A consumer of ORE Resource Maps encoded in
 JSON-LD SHOULD support all of the syntactic conventions defined by
 JSON-LD. This allowance for different syntactic conventions is
-supported by conformant JSON-LD parsers.</p>
+supported by conformant
+<a href="http://json-ld.org/#developers">JSON-LD parsers</a>.</p>
 
 
 <h2 id="syntax">2. Overview of ORE in JSON-LD syntax</h2>
@@ -260,10 +261,10 @@ MUST be valid <a href="http://www.w3.org/TR/json-ld/">JSON-LD</a>.
 
 <p>
 An ORE JSON-LD resource MUST define a JSON-LD <code>@context</code>,
-which SHOULD be <code>"https://w3id.org/ore/context"</code>
+which SHOULD be <code>https://w3id.org/ore/context</code>
 (see <a href="#context">ORE JSON-LD context</a> below).
 </p>
-<p class="draft">
+<p>
 The <code>@type</code> SHOULD be provided for ORE resources of type
 <code>Aggregation</code>,
 <code>ResourceMap</code>,
@@ -292,7 +293,7 @@ in which case it MUST indicate which <code>Aggregation</code> it <code>describes
 </pre>
 
 The Aggregation MUST have an <code>@id</code> to identify it; this URI SHOULD be absolute.
-The ResourceMap MAY have an identifier using <code>@id</code>, which MUST be different from 
+The ResourceMap MAY have an identifier using <code>@id</code>, which MUST be different from
 the Aggregation URI.
 
 
@@ -356,7 +357,7 @@ with <code>@id</code>:
       "aggregates": [
           "http://example.com/document-1",
           { "@id": "http://other.example.org/data-2",
-            "@type": "dcterms:Dataset"
+            "@type": "AggregatedResource"
           }
       ]
       </strong>
@@ -365,17 +366,39 @@ with <code>@id</code>:
 </pre>
 
 <p>
-The resource MAY specify its <code>"@type": "AggregatedResource"</code>, although
-more specific types are RECOMMENDED.
+The resource MAY specify its <code>"@type": "AggregatedResource"</code>. If a
+more specific type of the resource is known (e.g. <a href="http://purl.org/dc/dcmitype/MovingImage">dcmitype:MovingImage</a> or
+<a href="http://purl.org/spar/fabio/MagazineNewsItem">spar:MagazineNewsItem</a>),
+it is RECOMMENDED to specify this using <code>@type</code> and the full URI of
+the class. A JSON List MAY be used to indicate multiple types. Example:
 </p>
+
+<pre>
+{ "@context": "https://w3id.org/ore/context",
+  "@type": "ResourceMap",
+  "describes": {
+      "@id": "http://example.com/aggregation-1",
+      "@type": "Aggregation",
+      <strong>
+      "aggregates": [
+          "http://example.com/document-1",
+          { "@id": "http://other.example.org/data-2",
+            "@type": ["AggregatedResource",
+                      "http://purl.org/dc/dcmitype/Dataset",
+                      "http://www.w3.org/ns/dcat#Dataset"]
+          }
+      ]
+      </strong>
+  }
+}
+</pre>
+
 <p>
 Additional descriptions about the aggregated resource MAY be provided using other RDF vocabularies
-according to the <a href="http://www.w3.org/TR/json-ld/">JSON-LD syntax</a>,
-for instance, to indicate a specific <code>@type</code> of
-<code>dcterms:Dataset</code> (see above).
-The example below shows how to to indicate the provenance of an aggregated resource using
+following the <a href="http://www.w3.org/TR/json-ld/">JSON-LD syntax</a>.
+The example below shows how to to indicate the <em>provenance</em> of an aggregated resource using
 <a href="http://www.w3.org/TR/prov-o/">PROV-O</a> and <a href="http://purl.org/pav/html">PAV</a>.
-When using third-party vocabularies it may be desired to add prefixes using
+When using third-party vocabularies it may be desirable to add prefixes using
 additional <a href="http://www.w3.org/TR/json-ld/#the-context"><code>@context</code></a>(s):
 </p>
 
@@ -443,10 +466,10 @@ then this can be indicated with <code>isAggregatedBy</code>:
 It is NOT RECOMMENDED to provide <code>aggregates</code> of the other
 <code>Aggregation</code>, but one MAY use <code>isDescribedBy</code> to indicate
 its <code>ResourceMap</code> representations.</p>
-    
-    
-<p>If <em>aggregating another Aggregation</em>, 
-it SHOULD be typed as an <code>Aggregation</code>, 
+
+
+<p>If <em>aggregating another Aggregation</em>,
+it SHOULD be typed as an <code>Aggregation</code>,
 and SHOULD specify at least one <code>isDescribedBy</code>:
 </p>
 
@@ -473,9 +496,10 @@ and SHOULD specify at least one <code>isDescribedBy</code>:
 <h4 id="proxies">proxies, proxyFor, proxyIn</h4>
 
 <p>
-<a href="http://www.openarchives.org/ore/1.0/vocabulary#proxy">Proxies</a> 
-represents an <code>AggregatedResource</code> as it exists in a specific <code>Aggregation</code>.
-To add a <code>Proxy</code>, use <code>proxies</code> and <code>proxyFor</code>:
+<a href="http://www.openarchives.org/ore/1.0/vocabulary#proxy">Proxies</a>
+represents an <code>AggregatedResource</code> as it exists in a specific <code>Aggregation</code>,
+which can be used as a subject in other annotations and aggregations. Proxies
+SHOULD be provided for each aggregated resource:
 </p>
 
 <pre>
@@ -485,7 +509,7 @@ To add a <code>Proxy</code>, use <code>proxies</code> and <code>proxyFor</code>:
       "@id": "http://example.com/aggregation-1",
       "@type": "Aggregation",
       "aggregates": [
-          { "@id": "http://example.com/document-1" },
+          { "@id": "http://example.com/document-1" }
       ],
       <strong>
       "proxies": [
@@ -498,10 +522,23 @@ To add a <code>Proxy</code>, use <code>proxies</code> and <code>proxyFor</code>:
 }
 </pre>
 
-<p>The resource described by <code>proxyFor</code> MUST be listed under <code>aggregates</code>.</p>
+<p>
+The property <code>proxies</code> SHOULD be a JSON List of resources,
+each of which SHOULD have <code>"@type": "Proxy"</code> and MUST
+identify the aggregated resource using <code>proxyFor</code>.
+The resource identified by <code>proxyFor</code> MUST be listed under <code>aggregates</code>.
+</p>
+<p>
+The proxy MUST be identified with an URI using <code>@id</code>, which MAY
+be a randomly generated <a href="http://www.ietf.org/rfc/rfc4122.txt">UUID</a>
+using the <code>urn:uuuid:</code> scheme.
+</p>
 
-<p>Note that <code>proxyIn</code> SHOULD NOT be provided for proxies listed under
-<code>proxies</code>; however in the special case of <em>aggregating 
+<p>Note that, unlike in other serializations of ORE resource maps,
+the property <code>proxyIn</code> SHOULD NOT be given for proxies listed under
+<code>proxies</code> (it is already implied as <code>proxies</code> is a
+<code>@reverse</code> property for <code>proxyIn</code>);
+however in the special case of <em>aggregating
 a proxy</em>, it MUST specify <code>proxyIn</code>, which MUST be a different Aggregation: </p>
 
 <pre>
@@ -512,8 +549,8 @@ a proxy</em>, it MUST specify <code>proxyIn</code>, which MUST be a different Ag
       "@type": "Aggregation",
       "aggregates": [
           { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
-            "@type": "Proxy",
 <strong>
+            "@type": "Proxy",
             "proxyFor": "http://example.com/document-1",
             "proxyIn": "http://other.example.org/aggregation-3"
 </strong>
@@ -524,16 +561,16 @@ a proxy</em>, it MUST specify <code>proxyIn</code>, which MUST be a different Ag
 </pre>
 <p>
 Such "external" proxies MUST NOT be listed under <code>proxies</code> as a proxy can
-only be <code>proxyFor</code> for a single <code>Aggregation</code>, and an 
-aggregation SHOULD NOT aggregate its own proxies. The <code>proxyIn</code> 
-MAY be expanded to a JSON Object with <code>@id</code> and <code>"@type": "Aggregation"</code> 
+only be <code>proxyFor</code> for a single <code>Aggregation</code>, and an
+aggregation SHOULD NOT aggregate its own proxies. The <code>proxyIn</code>
+MAY be expanded to a JSON Object with <code>@id</code> and <code>"@type": "Aggregation"</code>
 to provide <code>isDescribedBy</code> .
 </p>
 
-<div class="draft">
+<div>
 <h4 id="lineage">lineage and provenance of proxy</h4>
 <p>
-If an aggregated resource was <em></em>discovered in a different aggregation</e>, this 
+If an aggregated resource was <em>discovered in a different aggregation</em>, this
 <a href="http://www.openarchives.org/ore/1.0/vocabulary#ore-lineage">lineage</a>
 can be described between the corresponding proxies:
 </p>
@@ -565,16 +602,16 @@ can be described between the corresponding proxies:
 </pre>
 
 Other kinds of <em>provenance of a proxy</em> (e.g. who aggregated the given resource)
-MAY be stated using vocabularies like 
-<a href="http://www.w3.org/TR/prov-o/">PROV-O</a> 
-and <a href="http://purl.org/pav/html">PAV</a>. The example below says that Matthew 
-aggregated <code>document-1</code> (e.g. created its proxy in this aggregation) 
-on the 17th of May 2014 (without necessarily creating document-1):
+MAY be stated using vocabularies like
+<a href="http://www.w3.org/TR/prov-o/">PROV-O</a>
+and <a href="http://purl.org/pav/html">PAV</a>. The example below says that Matthew
+aggregated <code>document-1</code> (e.g. created its proxy in this aggregation)
+on the 17th of May 2014 (without implying that he created <em>document-1</em>):
 
 <pre>
 { "@context": [
     "https://w3id.org/ore/context",
-    { 
+    {
       "foaf": "http://xmlns.com/foaf/0.1/",
       "prov": "http://www.w3.org/ns/prov#",
       "xsd": "http://www.w3.org/2001/XMLSchema#",
@@ -598,12 +635,12 @@ on the 17th of May 2014 (without necessarily creating document-1):
                         "foaf:name": "Matthew Gamble"
                     },
                     "prov:generatedAtTime": "2014-05-17T14:00:00Z"
-</strong>                
+</strong>
                   }
       ]
   }
 }
-   
+
 </pre>
 
 </div>
@@ -623,26 +660,50 @@ convert to other RDF formats.
 </p>
 
 
-<div>
+<p>
         The context is available from <a href="https://w3id.org/ore/context">https://w3id.org/ore/context</a>, from
         where it SHOULD be included using the <code>@context</code> keyword at the top-level node of ORE JSON-LD documents:
+</p>
 
-        <pre>
-          { "@context": "https://w3id.org/ore/context",
-            "@type": "ResourceMap",
-            "...": ""
-          }
-        </pre>
+<pre>
+  { <strong>"@context": "https://w3id.org/ore/context"</strong>,
+    "@type": "ResourceMap",
+    "...": ""
+  }
+</pre>
 
 
-</div>
+<p>
+In order to facilitate usage of additional RDF vocabularies,
+one MAY instead specify <code>@context</code> as a JSON List which includes the
+ORE context and additional contexts as either URIs or
+JSON objects:
+</p>
 
+<pre>
+{ "@context": [
+    "https://w3id.org/ore/context",
+    <strong>"http://example.com/other/context",
+    {
+      "prov": "http://www.w3.org/ns/prov#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "prov:generatedAtTime": { "@type": "xsd:dateTime" }
+    }</strong>
+  ],
+  "@type": "ResourceMap",
+  "...": ""
+}
+</pre>
+
+
+<!--
         <div class="draft">
                 An alternative context is available at
         <a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>,
         which defines ORE terms with the <code>ore:</code> prefix. This context MAY be used instead,
         for instance to avoid naming conflicts when including the ORE context in another JSON-LD context.
 </div>
+-->
 
 <p>
 The content of the <a href="context.json">ORE JSON-LD context</a> at time of writing is:
@@ -703,15 +764,25 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
 
 
 <h2 id="complete">Complete example</h2>
-The following complete example shows a ResourceMap describing <code>aggregation-1</code> 
-containing 4 resources (<code>document-1</code>, 
-<code>data-2</code>,  <code>aggregation-3</code> and 
+<p>
+The following complete example shows a <em>ResourceMap</em> describing <code>aggregation-1</code>
+containing 4 resources (<code>document-1</code>,
+<code>data-2</code>,  <code>aggregation-3</code> and
 a <em>proxy for document-1 within aggregation-3</em>). </code> <code>data-2</code> is also
-known to be aggregated by <code>aggregation-2</code>. aggregation-3 is itself an aggregation
+known to be aggregated by <code>aggregation-2</code>.
+</p>
+<p>
+The aggregated resource <code>aggregation-3</code> is itself an aggregation
 with its own resource maps and proxies, but they are not detailed fully here (except
-for the aggregated external proxy). Finally the aggregation has its own set of
-identified proxies, one for each aggregated resource. Here, the lineage of 
-data-2's aggregation is shown to be originating from aggregation-2.
+for the aggregated external proxy <code>urn:uuid:095612..</code>).
+</p>
+<p>
+Finally our aggregation has its own set of
+identified <code>proxies</code>, one for each aggregated resource.
+Here, the lineage of
+<code>data-2</code>'s aggregation is shown to be originating from
+<code>aggregation-2</code>.
+</p>
 
 
 <pre>
@@ -728,7 +799,7 @@ data-2's aggregation is shown to be originating from aggregation-2.
       "aggregates": [
           "http://example.com/document-1",
           { "@id": "http://other.example.org/data-2",
-            "isAggregatedBy": { 
+            "isAggregatedBy": {
                 "@id": "http://other.example.org/aggregation-2",
                 "@type": "Aggregation",
                 "isDescribedBy": "http://other.example.org/aggregation-2.rdf"
@@ -738,7 +809,7 @@ data-2's aggregation is shown to be originating from aggregation-2.
             "@type": "Aggregation",
             "isDescribedBy": [ "http://other.example.org/aggregation-3.rdf",
                                "http://other.example.org/aggregation-3.jsonld" ]
-          },       
+          },
           { "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
             "@type": "Proxy",
             "proxyFor": "http://example.com/document-1",
@@ -748,7 +819,7 @@ data-2's aggregation is shown to be originating from aggregation-2.
       "proxies": [
               { "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
                 "@type": "Proxy",
-                "proxyFor": "http://example.com/document-1" 
+                "proxyFor": "http://example.com/document-1"
               },
               { "@id": "urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751",
                 "@type": "Proxy",
@@ -757,15 +828,15 @@ data-2's aggregation is shown to be originating from aggregation-2.
                    "@id": "urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66",
                    "@type": "Proxy",
                    "proxyFor": "http://other.example.org/data-2",
-                   "proxyIn": "http://other.example.org/aggregation-2" } 
+                   "proxyIn": "http://other.example.org/aggregation-2" }
               },
               { "@id": "urn:uuid:c0f5f1ad-5269-4cfc-b9f5-e9621c499f53",
                 "@type": "Proxy",
-                "proxyFor": "http://other.example.org/aggregation-3" 
+                "proxyFor": "http://other.example.org/aggregation-3"
               },
               { "@id": "urn:uuid:318745e0-5ea4-4a68-8a0a-ab27ab96985a",
                 "@type": "Proxy",
-                "proxyFor": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602" 
+                "proxyFor": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602"
               }
       ],
       "similarTo": "http://dx.doi.org/10.1002/cpe.1594"
@@ -833,14 +904,14 @@ If processed with the <a href="#context">ORE JSON-LD context</a>, the following 
 <h2 id="frame">4. ORE JSON-LD frame</h2>
 
 <p>
-    JSON-LD, as all RDF serialization, allow many degrees of freedom for representing the same RDF graph. Thus, 
-    an ORE manifest could appear in other JSON structures than the one defined in this document. This could 
+    JSON-LD, as all RDF serialization, allow many degrees of freedom for representing the same RDF graph. Thus,
+    an ORE manifest could appear in other JSON structures than the one defined in this document. This could
     particularly be the case if converting an ORE manifest to JSON-LD using regular RDF libraries.
 </p>
 <p>
     By facilitating <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-LD Framing</a> with
     the  <a href="frame.json">ORE JSON-LD Frame</a>, followed by
-    <a href="http://www.w3.org/TR/json-ld-api/#compaction-algorithms">JSON-LD Compaction</a>, 
+    <a href="http://www.w3.org/TR/json-ld-api/#compaction-algorithms">JSON-LD Compaction</a>,
     a predictable JSON structure is returned that can be used by consumers without
     requiring any further JSON-LD knowledge.
 </p>
@@ -976,7 +1047,7 @@ If processed with the <a href="#context">ORE JSON-LD context</a>, the following 
       }
     }
   ]
-}    
+}
 </pre>
 
 <p>
@@ -987,7 +1058,7 @@ If processed with the <a href="#context">ORE JSON-LD context</a>, the following 
 </p>
 
 <pre>
-    
+
 </pre>
 
 <h2 id="references">5. References</h2>
@@ -1074,7 +1145,6 @@ World Wide Web Consortium, 15 January 2004.</dd>
 </div>
 
 <div class="back">
-<!--START-INCLUDE=_acknowledgements.inc-->
 <div class="body">
 <h2><a name="acknowledgments" id="acknowledgments"></a>A. Acknowledgements</h2>
 <p>This document is the work of the
@@ -1085,30 +1155,7 @@ the <a href="http://mellon.org/">Andrew W. Mellon Foundation</a>,
 <a href="http://nsf.gov">National Science Foundation</a>.&nbsp; Additional
 support is provided by the <a href="http://www.cni.org">Coalition for
 Networked Information</a>.</p>
-<!--
-<p>This document is based on meetings of the
-<a href="http://www.openarchives.org/ore/ORE_Community.php#OAI-ORE_Technical_Committee">
-OAI-ORE Technical Committee</a> (ORE-TC), with participation from the
-<a href="http://www.openarchives.org/ore/ORE_Community.php#OAI-ORE_Liaison_Group">
-OAI-ORE Liaison Group</a> (ORE-LG).&nbsp; Members of the ORE-TC are:
-Chris Bizer (Freie Universit&#228;t Berlin), Les Carr (University of Southampton), Tim DiLauro
-(Johns Hopkins University), Leigh Dodds (Ingenta), David Fulker (UCAR), Tony Hammond
-(Nature Publishing Group), Pete Johnston (Eduserv Foundation), Richard
-Jones (Imperial College), Peter Murray (OhioLINK), Michael Nelson (Old
-Dominion University), Ray Plante (NCSA and National Virtual
-Observatory), Rob Sanderson (University of Liverpool), Simeon Warner
-(Cornell University), and Jeff Young (OCLC).&nbsp; Members of ORE-LG are:
-Leonardo Candela (DRIVER), Tim Cole (DLF Aquifer and UIUC Library),
-Julie Allinson (JISC), Jane Hunter (DEST), Savas Parastatidis&nbsp;
-(Microsoft), Sandy Payette (Fedora Commons), Thomas Place (DARE and
-University of Tilburg), Andy Powell (DCMI), and Robert Tansley (Google,
-Inc. and DSpace)</p>
-<p>We also acknowledge comments from the
-<a href="http://www.openarchives.org/ore/ORE_Community.php#OAI-ORE_Advisory_Committee">
-OAI-ORE Advisory Committee</a> (ORE-AC).</p>
--->
 </div>
-<!--END-INCLUDE=_acknowledgements.inc-->
 
 <div class="changelog">
 <h2><a name="changelog" id="changelog"></a>B. Change Log</h2>
@@ -1117,6 +1164,16 @@ OAI-ORE Advisory Committee</a> (ORE-AC).</p>
             <th>Date</th>
             <th>Editor</th>
             <th>Description</th>
+        </tr>
+        <tr>
+            <td>2014-07-30</td>
+            <td>stain</td>
+            <td>Clarified drafts and proxies</td>
+        </tr>
+        <tr>
+            <td>2014-06-11</td>
+            <td>stain</td>
+            <td>Fixing syntax issues</td>
         </tr>
         <tr>
             <td>2014-06-05</td>
