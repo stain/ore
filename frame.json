@@ -1,4 +1,4 @@
-{ "@context": "http://ns.taverna.org.uk/2014/test-cors/context.jsonld",
+{ "@context": "https://w3id.org/ore/frame",
 
   "describes": {
     "@type": "Aggregation",
