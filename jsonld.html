@@ -717,7 +717,7 @@ on the 17th of May 2014 (without implying that he created <code>document-1</code
 
 <section id="context">
 
-<h2>. ORE JSON-LD context</h2>
+<h2>3. ORE JSON-LD context</h2>
 
 <p>
 A <a href="http://www.w3.org/TR/2014/REC-json-ld-20140116/#the-context">JSON-LD context</a>
@@ -746,7 +746,7 @@ keyword at the top-level node of ORE JSON-LD documents:
 
 
 <section id="additional-contexts">
-<h3>Additional contexts</h3>
+<h3>3.1 Additional contexts</h3>
 <p>
 In order to facilitate usage of additional RDF vocabularies,
 one MAY instead specify
@@ -773,7 +773,7 @@ JSON objects:
 </section>
 
 <section id="context-content">
-<h3>Content of ORE JSON-LD context</h3>
+<h3>3.2 Content of ORE JSON-LD context</h3>
 
 <!--
 <div class="draft">
@@ -845,7 +845,7 @@ The content of the <a href="context.json">ORE JSON-LD context</a> at time of wri
 
 
 <section id="complete-example">
-<h2>Complete example</h2>
+<h2>4. Complete example</h2>
 <p>
 The following complete example shows a <em>ResourceMap</em> describing <code>aggregation-1</code>
 containing 4 resources (<code>document-1</code>,
@@ -868,7 +868,7 @@ Here, the lineage of
 
 
 <section id="example-jsonld">
-<h3>Example JSON-LD</h3>
+<h3>4.1 Example JSON-LD</h3>
 <pre>
 { "@context": "https://w3id.org/ore/context",
   "@id": "",
@@ -930,7 +930,7 @@ Here, the lineage of
 </section>
 
 <section id="example-triples">
-  <h3>Example triples</h3>
+  <h3>4.2 Example triples</h3>
 
 If processed with the <a href="#context">ORE JSON-LD context</a> and
 <a href="http://www.w3.org/TR/json-ld-api/#deserialize-json-ld-to-rdf-algorithm">using a JSON-LD library to generate RDF</a>,
@@ -992,7 +992,7 @@ the following triples are expressed:
 
 
 <section id="frame">
-<h2>4. ORE JSON-LD frame</h2>
+<h2>5. ORE JSON-LD frame</h2>
 
 <p>
 JSON-LD, as all RDF serialization, allow many degrees of freedom for
@@ -1011,7 +1011,45 @@ a predictable JSON structure is returned that can be used by consumers without
 requiring any further JSON-LD knowledge.
 </p>
 
-<p>For example, say we have the following 'unstructured' JSON-LD ORE manifest:
+<p>
+The <a href="frame.json">ORE JSON-LD frame</a> at time of writing is:
+</p>
+
+<pre id="frame.json">
+{ "@context": "https://w3id.org/ore/frame",
+
+  "describes": {
+    "@type": "Aggregation",
+    "isDescribedBy": [
+      {
+        "@embed": false
+      }
+    ],
+    "@requireAll": false,
+    "aggregates": [
+      {
+        "@id": {},
+        "@requireAll": false,
+        "isAggregatedBy": {
+          "@embed": false,
+          "@omitDefault": true,
+          "isDescribedBy": [
+            {
+            "@embed": false,
+            "@omitDefault": true
+          }
+          ]
+        }
+      }
+    ]
+  }
+
+}
+</pre>
+
+
+<h3>5.1 Example framing</h3>
+<p>For example, say we have a <a href="unstructured.json">'unstructured' JSON-LD ORE manifest</a>:
 </p>
 
 <pre>
@@ -1274,7 +1312,7 @@ requiring any further JSON-LD knowledge.
 
 <section id="references">
 
-<h2>5. References</h2>
+<h2>6. References</h2>
 
 <dl>
 
