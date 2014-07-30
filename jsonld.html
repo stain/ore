@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="shortcut icon" href="http://www.openarchives.org/ore/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="http://www.openarchives.org/ore/1.0/ore-spec.css" type="text/css" />
-        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css' />
+        <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
         <style type="text/css">
         pre,code {
             font-family: 'Consolas', 'Inconsolata', 'Monaco', monospace;
@@ -77,6 +77,9 @@
   <dd><a rel="pav:contributedBy" href="http://orcid.org/0000-0002-9260-0753">
          <span property="foaf:name">Oscar Corcho</span></a>,
       <a href="http://www.oeg-upm.net/">Universidad Politecnica de Madrid</a></dd>
+  <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0002-7970-7855">
+        <span property="foaf:name">Simeon Warner</span></a>,
+      <a href="http://www.cornell.edu/">Cornell University</a></dd>
 </dl>
 
 
@@ -96,8 +99,8 @@ between these and other resources).</p>
 <p>Since a Resource Map is an RDF
 Graph, it can be serialized using any RDF syntax.  This document
 outlines the use of one such syntax for the serialization of Resource
-Maps: <a href="http://json-ld.org/">JSON-LD</a>. Two companion document
-[<a href="http://www.openarchives.org/ore/1.0/rdfa">ORE RDFa</a>]       and
+Maps: <a href="http://json-ld.org/">JSON-LD</a>. Two companion documents
+[<a href="http://www.openarchives.org/ore/1.0/rdfa">ORE RDFa</a>] and
 [<a href="http://www.openarchives.org/ore/1.0/rdfxml">ORE RDF/XML</a>]
 outline the serialization of Resource Maps in
 [<a href="http://www.w3.org/TR/rdfa-syntax/">RDFa Syntax</a>] and
@@ -122,22 +125,25 @@ guides</a>.</p>
 <section id="introduction">
 <h2>1. Introduction</h2>
 
-<p>The Open Archives Initiative Object Reuse and Exchange (OAI-ORE)
-[<a href="http://www.openarchives.org/ore/1.0/datamodel">ORE Model</a>] introduces the notion
-of a <a href="http://www.openarchives.org/ore/1.0/datamodel#Resource_Map">Resource Map</a>,
-an <a href="http://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/#section-rdf-graph">RDF Graph</a>
-[<a href="http://www.w3.org/TR/rdf11-concepts/">RDF Concepts</a>] which describes an
-<a href="http://www.openarchives.org/ore/1.0/datamodel#Aggregation">Aggregation</a>,
-the <a href="http://www.openarchives.org/ore/1.0/datamodel#Aggregated_Resource">Aggregated Resources</a>
-of which it is composed, and the relationships
-between them (and/or the relationships between these and other resources).
-Since a Resource Map is an RDF Graph, it can be serialized using any
-RDF syntax.</p>
+<p>
+Open Archives Initiative Object Reuse and Exchange (OAI-ORE)
+defines standards for the description and exchange of aggregations
+of web resources. The 
+<a href="http://www.openarchives.org/ore/1.0/datamodel">OAI-ORE Abstract Data Model</a>
+[<a href="#ORE_Model">ORE Model</a>] 
+introduces the notion of a Resource Map, an <a
+  href="http://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/#section-rdf-graph">RDF Graph</a>
 
-<p>This document outlines the use of one such syntax for the
+[<a href="#RDF_Concepts">RDF Concepts</a>] which describes the 
+Aggregation, the aggregated Resources of which it is composed, 
+and the relationships between them (and/or the relationships 
+between these and other resources). Since a Resource Map is 
+an RDF Graph, it can be serialized using any RDF syntax. 
+This document outlines the use of one such syntax for the
 serialization of Resource Maps: <a href="http://json-ld.org/">JSON-LD</a>.
+</p>
 
-
+<p>
 The <a href="http://www.w3.org/TR/json-ld/">JSON-LD specification</a>
 describes a format for serialising RDF
 graphs as <a href="http://www.ietf.org/rfc/rfc4627.txt">JSON</a>[RFC4627].
@@ -153,8 +159,8 @@ resource, and can point to either other JSON Objects, JSON Lists (multiple
 property relations) or to plain JSON literals.  The JSON-LD
 <a href="http://www.w3.org/TR/2014/REC-json-ld-20140116/#the-context"><code>@context</code></a>
 can define
-prefixes and short-hand names, avoiding the use of full IRIs for identifying
-properties and types. This specification includes a
+prefixes and short-hand names, thus avoiding the need to use full IRIs 
+for identifying properties and types. This specification includes a
 <a href="context">ORE JSON-LD context</a> for this purpose.
 </p>
 
@@ -200,12 +206,12 @@ without any special measures.
    <tr>
     <td><span class="code">ore</span></td>
     <td><span class="code">http://www.openarchives.org/ore/terms/</span></td>
-    <td><a href="http://www.openarchives.org/ore/1.0/vocabulary">ORE vocabulary</a></td>
+    <td><a href="http://www.openarchives.org/ore/1.0/vocabulary">ORE</a> vocabulary</td>
    </tr>
    <tr>
     <td><span class="code">rdf</span></td>
     <td><span class="code">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span></td>
-    <td><a href="http://www.w3.org/TR/rdf-schema/">RDF</a> vocabulary </td>
+    <td><a href="http://www.w3.org/TR/rdf-schema/">RDF</a> built-in vocabulary </td>
    </tr>
    <tr>
     <td><span class="code">rdfs</span></td>
@@ -408,7 +414,7 @@ with <code>@id</code>:
 </pre>
 
 <p>
-The resource MAY specify its
+Aggregated resources MAY specify their
 <code>"@type": "<a href="http://www.openarchives.org/ore/1.0/vocabulary#aggr_res">AggregatedResource</a>"</code>.
 If a
 more specific type of the resource is known (e.g. <a href="http://purl.org/dc/dcmitype/MovingImage">dcmitype:MovingImage</a> or
@@ -438,7 +444,7 @@ the class. A JSON List MAY be used to indicate multiple types. Example:
 </pre>
 
 <p>
-Additional descriptions about the aggregated resource MAY be provided using other RDF vocabularies
+Additional descriptions of aggregated resources MAY be provided using other RDF vocabularies
 following the <a href="http://www.w3.org/TR/json-ld/">JSON-LD syntax</a>.
 The example below shows how to to indicate the <a href="http://www.w3.org/TR/prov-primer/">provenance</a>
 of an aggregated resource using
@@ -520,7 +526,8 @@ to indicate its <code>ResourceMap</code> representations.</p>
 
 <p>In the special case of <em>aggregating another Aggregation</em>,
 that SHOULD be typed as an <code>Aggregation</code>,
-and SHOULD specify at least one <code>isDescribedBy</code>:
+and there SHOULD be at least one <code>ResourceMap</code>
+representation indicated with <code>isDescribedBy</code>:
 </p>
 
 <pre>
@@ -548,7 +555,7 @@ and SHOULD specify at least one <code>isDescribedBy</code>:
 <h4>proxies, proxyFor, proxyIn</h4>
 
 <p>
-<a href="http://www.openarchives.org/ore/1.0/datamodel#Proxies">Proxies</a>
+A <a href="http://www.openarchives.org/ore/1.0/datamodel#Proxies">Proxy</a>
 represents an <code>AggregatedResource</code> as it exists in a specific <code>Aggregation</code>,
 which can be used as a
 <a href="http://www.openarchives.org/ore/1.0/datamodel#ProxyTarget">subject in other annotations</a>
@@ -597,7 +604,7 @@ SHOULD NOT be given for proxies listed under
 <a href="http://www.w3.org/TR/json-ld/#reverse-properties"><code>@reverse</code></a>
 property for <code>proxyIn</code>);
 however in the special case of <em>aggregating
-a proxy</em>, that MUST specify <code>proxyIn</code>, which MUST be a different Aggregation: </p>
+a proxy</em>, that MUST specify <code>proxyIn</code>, which MUST be a different Aggregation:</p>
 
 <pre>
 { "@context": "https://w3id.org/ore/context",
@@ -651,7 +658,7 @@ can be described between the corresponding proxies:
                 "lineage" {
                     "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
                     "@type": "Proxy",
-                    "proxyFor": http://example.com/document-1",
+                    "proxyFor": "http://example.com/document-1",
                     "proxyIn": "http://other.example.org/aggregation-3"
                 }
                 </strong>
@@ -666,7 +673,7 @@ MAY be stated using vocabularies like
 <a href="http://www.w3.org/TR/prov-o/">PROV-O</a>
 and <a href="http://purl.org/pav/html">PAV</a>. The example below says that Matthew
 aggregated <code>document-1</code> (e.g. created its proxy in this aggregation)
-on the 17th of May 2014 (without implying that he created <em>document-1</em>):
+on the 17th of May 2014 (without implying that he created <code>document-1</code>):
 </p>
 
 <pre>
@@ -713,7 +720,7 @@ on the 17th of May 2014 (without implying that he created <em>document-1</em>):
 <h2>. ORE JSON-LD context</h2>
 
 <p>
-An <a href="http://www.w3.org/TR/2014/REC-json-ld-20140116/#the-context">JSON-LD context</a>
+A <a href="http://www.w3.org/TR/2014/REC-json-ld-20140116/#the-context">JSON-LD context</a>
 defines how to understand identifiers in a JSON-LD document.
 The <a href="context.json">ORE context</a> thus defines how to
 interpret documents according to the <a href="#syntax">ORE
@@ -725,8 +732,9 @@ convert to other RDF formats.
 
 
 <p>
-        The context is available from <a href="https://w3id.org/ore/context">https://w3id.org/ore/context</a>, from
-        where it SHOULD be included using the <code>@context</code> keyword at the top-level node of ORE JSON-LD documents:
+The context is available from <a href="https://w3id.org/ore/context">https://w3id.org/ore/context</a>, 
+from where it SHOULD be included using the <code>@context</code> 
+keyword at the top-level node of ORE JSON-LD documents:
 </p>
 
 <pre>
@@ -768,11 +776,11 @@ JSON objects:
 <h3>Content of ORE JSON-LD context</h3>
 
 <!--
-        <div class="draft">
-                An alternative context is available at
-        <a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>,
-        which defines ORE terms with the <code>ore:</code> prefix. This context MAY be used instead,
-        for instance to avoid naming conflicts when including the ORE context in another JSON-LD context.
+<div class="draft">
+An alternative context is available at
+<a href="https://w3id.org/ore/context-ore">https://w3id.org/ore/context-ore</a>,
+which defines ORE terms with the <code>ore:</code> prefix. This context MAY be used instead,
+for instance to avoid naming conflicts when including the ORE context in another JSON-LD context.
 </div>
 -->
 
@@ -928,7 +936,6 @@ If processed with the <a href="#context">ORE JSON-LD context</a> and
 <a href="http://www.w3.org/TR/json-ld-api/#deserialize-json-ld-to-rdf-algorithm">using a JSON-LD library to generate RDF</a>,
 the following triples are expressed:
 <pre>
-
 &lt;&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.openarchives.org/ore/terms/ResourceMap&gt; .
 &lt;&gt; &lt;http://www.openarchives.org/ore/terms/describes&gt; &lt;http://example.com/aggregation-1&gt; .
 
@@ -988,18 +995,20 @@ the following triples are expressed:
 <h2>4. ORE JSON-LD frame</h2>
 
 <p>
-    JSON-LD, as all RDF serialization, allow many degrees of freedom for representing the same RDF graph. Thus,
-    an ORE manifest could appear in other JSON structures than the one defined in this document. This could
-    particularly be the case if converting an ORE manifest to JSON-LD using regular RDF libraries.
+JSON-LD, as all RDF serialization, allow many degrees of freedom for 
+representing the same RDF graph. Thus, an ORE Resource Map could appear
+in other JSON structures than the one defined in this document. This could 
+particularly be the case if converting an ORE Resource Map to JSON-LD using
+regular RDF libraries.
 </p>
+
 <p>
-    By facilitating <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-LD Framing</a>
-    [<a href="#JSON-LD-Framing">JSON-LD Framing</a>]
-    with
-    the  <a href="frame.json">ORE JSON-LD Frame</a>, followed by
-    <a href="http://www.w3.org/TR/json-ld-api/#compaction-algorithms">JSON-LD Compaction</a>,
-    a predictable JSON structure is returned that can be used by consumers without
-    requiring any further JSON-LD knowledge.
+By facilitating <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-LD Framing</a>
+[<a href="#JSON-LD-Framing">JSON-LD Framing</a>]
+with the <a href="frame.json">ORE JSON-LD Frame</a>, followed by
+<a href="http://www.w3.org/TR/json-ld-api/#compaction-algorithms">JSON-LD Compaction</a>,
+a predictable JSON structure is returned that can be used by consumers without
+requiring any further JSON-LD knowledge.
 </p>
 
 <p>For example, say we have the following 'unstructured' JSON-LD ORE manifest:
