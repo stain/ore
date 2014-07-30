@@ -128,17 +128,17 @@ guides</a>.</p>
 <p>
 Open Archives Initiative Object Reuse and Exchange (OAI-ORE)
 defines standards for the description and exchange of aggregations
-of web resources. The 
+of web resources. The
 <a href="http://www.openarchives.org/ore/1.0/datamodel">OAI-ORE Abstract Data Model</a>
-[<a href="#ORE_Model">ORE Model</a>] 
+[<a href="#ORE_Model">ORE Model</a>]
 introduces the notion of a Resource Map, an <a
   href="http://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/#section-rdf-graph">RDF Graph</a>
 
-[<a href="#RDF_Concepts">RDF Concepts</a>] which describes the 
-Aggregation, the aggregated Resources of which it is composed, 
-and the relationships between them (and/or the relationships 
-between these and other resources). Since a Resource Map is 
-an RDF Graph, it can be serialized using any RDF syntax. 
+[<a href="#RDF_Concepts">RDF Concepts</a>] which describes the
+Aggregation, the aggregated Resources of which it is composed,
+and the relationships between them (and/or the relationships
+between these and other resources). Since a Resource Map is
+an RDF Graph, it can be serialized using any RDF syntax.
 This document outlines the use of one such syntax for the
 serialization of Resource Maps: <a href="http://json-ld.org/">JSON-LD</a>.
 </p>
@@ -159,7 +159,7 @@ resource, and can point to either other JSON Objects, JSON Lists (multiple
 property relations) or to plain JSON literals.  The JSON-LD
 <a href="http://www.w3.org/TR/2014/REC-json-ld-20140116/#the-context"><code>@context</code></a>
 can define
-prefixes and short-hand names, thus avoiding the need to use full IRIs 
+prefixes and short-hand names, thus avoiding the need to use full IRIs
 for identifying properties and types. This specification includes a
 <a href="context">ORE JSON-LD context</a> for this purpose.
 </p>
@@ -732,8 +732,8 @@ convert to other RDF formats.
 
 
 <p>
-The context is available from <a href="https://w3id.org/ore/context">https://w3id.org/ore/context</a>, 
-from where it SHOULD be included using the <code>@context</code> 
+The context is available from <a href="https://w3id.org/ore/context">https://w3id.org/ore/context</a>,
+from where it SHOULD be included using the <code>@context</code>
 keyword at the top-level node of ORE JSON-LD documents:
 </p>
 
@@ -995,9 +995,9 @@ the following triples are expressed:
 <h2>4. ORE JSON-LD frame</h2>
 
 <p>
-JSON-LD, as all RDF serialization, allow many degrees of freedom for 
+JSON-LD, as all RDF serialization, allow many degrees of freedom for
 representing the same RDF graph. Thus, an ORE Resource Map could appear
-in other JSON structures than the one defined in this document. This could 
+in other JSON structures than the one defined in this document. This could
 particularly be the case if converting an ORE Resource Map to JSON-LD using
 regular RDF libraries.
 </p>
@@ -1148,12 +1148,128 @@ requiring any further JSON-LD knowledge.
 <p>
     If we <em>expand</em> this JSON-LD document using <a href="https://w3id.org/ore/context">https://w3id.org/ore/context</a>,
     then <em>frame</em> it using <a href="https://w3id.org/ore/frame">https://w3id.org/ore/frame</a>
-    with <em>compaction</em> using <a href="https://w3id.org/ore/context">https://w3id.org/ore/context</a>, then
     we get:
 </p>
 
-<pre class="TODO">
+
+<pre>
+{
+  "@context": "https://w3id.org/ore/context",
+  "@graph": [
+    {
+      "@id": "index.html",
+      "@type": "ResourceMap",
+      "describes": {
+        "@id": "http://example.com/aggregation-1",
+        "@type": "Aggregation",
+        "aggregates": [
+          "http://example.com/document-1",
+          {
+            "@id": "http://other.example.org/data-2",
+            "isAggregatedBy": "http://other.example.org/aggregation-2"
+          },
+          {
+            "@id": "http://other.example.org/aggregation-3",
+            "@type": "Aggregation",
+            "isDescribedBy": [
+              "http://other.example.org/aggregation-3.rdf",
+              "http://other.example.org/aggregation-3.jsonld"
+            ]
+          },
+          {
+            "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+            "@type": "Proxy",
+            "proxyFor": "http://example.com/document-1",
+            "proxyIn": "http://other.example.org/aggregation-3"
+          }
+        ],
+        "isDescribedBy": [
+          "http://example.com/aggregation-1.rdf",
+          "http://example.com/aggregation-1.jsonld"
+        ],
+        "similarTo": "http://dx.doi.org/10.1002/cpe.1594"
+      }
+    }
+  ]
+}
 </pre>
+
+<p>
+  Note that JSON-LD Framing always gives a <code>@graph</code> JSON List
+  in case there are several resource maps that match the pattern.
+  The properties <code>aggregates</code> and <code>isDescribedBy</code>
+  if present, will after processing always be a JSON list, even if there
+  is only a single resource.
+<p>
+  Note: <code>@reverse</code> properties like <code>proxies</code> is not
+  yet commonly supported by JSON-LD Framing processors, and
+  might therefore have to be extracted separately using this frame:
+</p>
+<pre>
+{ "@context": "http://ns.taverna.org.uk/2014/test-cors/context.jsonld",
+
+   "@type": "Proxy",
+   "proxyFor": {
+     "@embed": false
+   },
+   "proxyIn": {
+     "@embed": false
+   },
+  "lineage": {
+    "@embed": false,
+    "@omitDefault": true
+  }
+}
+</pre>
+
+<p>When the above frame is processed against the earlier example it
+   will return a list of all the proxies
+   (including those in other aggregations):</p>
+<pre>
+{
+  "@context": "http://ns.taverna.org.uk/2014/test-cors/context.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:uuid:05bd5e0c-94c7-4856-a53f-7f6cf0756751",
+      "@type": "Proxy",
+      "lineage": "urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66",
+      "proxyFor": "http://other.example.org/data-2",
+      "proxyIn": "http://example.com/aggregation-1"
+    },
+    {
+      "@id": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+      "@type": "Proxy",
+      "proxyFor": "http://example.com/document-1",
+      "proxyIn": "http://other.example.org/aggregation-3"
+    },
+    {
+      "@id": "urn:uuid:318745e0-5ea4-4a68-8a0a-ab27ab96985a",
+      "@type": "Proxy",
+      "proxyFor": "urn:uuid:09561248-bf55-4c85-930a-9a7a60e81602",
+      "proxyIn": "http://example.com/aggregation-1"
+    },
+    {
+      "@id": "urn:uuid:360ea070-efee-11e3-ac10-0800200c9a66",
+      "@type": "Proxy",
+      "proxyFor": "http://other.example.org/data-2",
+      "proxyIn": "http://other.example.org/aggregation-2"
+    },
+    {
+      "@id": "urn:uuid:c0f5f1ad-5269-4cfc-b9f5-e9621c499f53",
+      "@type": "Proxy",
+      "proxyFor": "http://other.example.org/aggregation-3",
+      "proxyIn": "http://example.com/aggregation-1"
+    },
+    {
+      "@id": "urn:uuid:d4e63599-d28d-4966-8606-dbb985a865f2",
+      "@type": "Proxy",
+      "proxyFor": "http://example.com/document-1",
+      "proxyIn": "http://example.com/aggregation-1"
+    }
+  ]
+}
+</pre>
+
 </section>
 
 <section id="references">
