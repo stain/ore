@@ -1,12 +1,29 @@
-{ "@context": ["http://ns.taverna.org.uk/2014/test-cors/context.jsonld"
-              ],
-               
-"describes": {
-  "@type": "Aggregation",   
-  "isDescribedBy": [{"@embed": false}],
-  "aggregates": [
-     { 
-     }
-   ]
+{ "@context": "http://ns.taverna.org.uk/2014/test-cors/context.jsonld",
+
+  "describes": {
+    "@type": "Aggregation",
+    "isDescribedBy": [
+      {
+        "@embed": false
+      }
+    ],
+    "@requireAll": false,
+    "aggregates": [
+      {
+        "@id": {},
+        "@requireAll": false,
+        "isAggregatedBy": {
+          "@embed": false,
+          "@omitDefault": true,
+          "isDescribedBy": [
+            {
+            "@embed": false,
+            "@omitDefault": true
+          }
+          ]
+        }
+      }
+    ]
   }
+
 }
