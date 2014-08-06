@@ -11,6 +11,11 @@
         pre,code {
             font-family: 'Consolas', 'Inconsolata', 'Monaco', monospace;
         }
+        .warning {
+           background-color: #fcd;
+           padding: 0.5ex;
+           margin: 2ex;
+        }
         .TODO:before {
                 content: "TODO: ";
                 font-weight: bold;
@@ -50,7 +55,7 @@
 </div>
 <div id="titleBlock">
   <h2 class="title">ORE User Guide - Resource Map Implementation in JSON-LD</h2>
-  <h3 class="subTitle">Editors draft, 2014-07-30</h3>
+  <h3 class="subTitle">Editors draft, 2014-08-06</h3>
 </div><!--div-titleBlock-->
 <dl>
   <dt>This version:</dt>
@@ -74,10 +79,10 @@
   <dd><a rel="pav:contributedBy" href="http://orcid.org/0000-0003-4913-1485">
         <span property="foaf:name">Matthew Gamble</span></a>,
       <a href="http://www.cs.manchester.ac.uk/">University of Manchester</a></dd>
-  <dt>Contributors</dt>
   <dd><a rel="pav:contributedBy" href="http://orcid.org/0000-0002-9260-0753">
          <span property="foaf:name">Oscar Corcho</span></a>,
       <a href="http://www.oeg-upm.net/">Universidad Politecnica de Madrid</a></dd>
+  <dt>Contributors</dt>
   <dd><a property="pav:contributedBy" href="http://orcid.org/0000-0002-7970-7855">
         <span property="foaf:name">Simeon Warner</span></a>,
       <a href="http://www.cornell.edu/">Cornell University</a></dd>
@@ -122,7 +127,7 @@ guides</a>.</p>
 </section>
 <hr />
 
-<!-- 
+<!--
 Generated with respec.js
 -->
 <section id="toc">
@@ -1100,7 +1105,18 @@ By facilitating <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-L
 with the <a href="frame.json">ORE JSON-LD Frame</a>, followed by
 <a href="http://www.w3.org/TR/json-ld-api/#compaction-algorithms">JSON-LD Compaction</a>,
 a predictable JSON structure is returned that can be used by consumers without
-requiring any further JSON-LD knowledge.
+requiring any further JSON-LD or RDF knowledge.
+</p>
+
+<p class="warning">
+  <strong>Note:</strong>
+  At time of writing,
+  <a href="http://json-ld.org/spec/latest/json-ld-framing/">JSON-LD Framing</a>
+  a <em>draft specification</em> which is still subject to change.
+  This section is therefore to be considered as <em>experimental</em>.
+  The ORE JSON-LD Frame at <a href="https://w3id.org/ore/frame">https://w3id.org/ore/frame</a>
+  might subsequently be updated independently of this document in order to be compliant with
+  later updates of the JSON-LD Framing specification.
 </p>
 
 <p>
@@ -1108,41 +1124,22 @@ The <a href="frame.json">ORE JSON-LD frame</a> at time of writing is:
 </p>
 
 <pre id="frame.json">
-{ "@context": "https://w3id.org/ore/frame",
-
-  "describes": {
-    "@type": "Aggregation",
-    "isDescribedBy": [
-      {
-        "@embed": false
-      }
-    ],
-    "@requireAll": false,
-    "aggregates": [
-      {
-        "@id": {},
-        "@requireAll": false,
-        "isAggregatedBy": {
-          "@embed": false,
-          "@omitDefault": true,
-          "isDescribedBy": [
-            {
-            "@embed": false,
-            "@omitDefault": true
-          }
-          ]
-        }
-      }
-    ]
-  }
-
-}
+ { "@context": "https://w3id.org/ore/context",
+   "describes": {
+     "@type": "Aggregation",
+     "isDescribedBy":  { "@embed": false } ,
+     "aggregates":  { "@embed": true }  ,
+     "proxies":  { "@embed": true }
+   }
+ }
 </pre>
 
 
 <section id="example-framing">
 <h3>5.1 Example framing</h3>
-<p>For example, say we have a <a href="unstructured.json">'unstructured' JSON-LD ORE manifest</a>:
+<p>For example, say we have a <a href="unstructured.json">'unstructured' JSON-LD ORE manifest
+after serializing a Resource Map as triples in JSON-LD:
+</a>:
 </p>
 
 <pre>
@@ -1297,7 +1294,13 @@ The <a href="frame.json">ORE JSON-LD frame</a> at time of writing is:
           "http://example.com/document-1",
           {
             "@id": "http://other.example.org/data-2",
-            "isAggregatedBy": "http://other.example.org/aggregation-2"
+            "isAggregatedBy": {
+              "@id": "http://other.example.org/aggregation-2",
+              "@type": "Aggregation",
+              "isDescribedBy": [
+                "http://other.example.org/aggregation-2.rdf"
+              ]
+            }
           },
           {
             "@id": "http://other.example.org/aggregation-3",
@@ -1327,7 +1330,7 @@ The <a href="frame.json">ORE JSON-LD frame</a> at time of writing is:
 
 <p>
   Note that JSON-LD Framing always gives a <code>@graph</code> JSON List
-  in case there are several resource maps that match the pattern.
+  in case there are several Resource Maps that match the pattern.
   The properties <code>aggregates</code> and <code>isDescribedBy</code>
   if present, will after processing always be a JSON list, even if there
   is only a single resource.
@@ -1338,8 +1341,8 @@ The <a href="frame.json">ORE JSON-LD frame</a> at time of writing is:
   <h3>5.2 Framing proxies</h3>
 <p>
   Note: <code>@reverse</code> properties like <code>proxies</code> is not
-  yet commonly supported by JSON-LD Framing processors, and
-  might therefore have to be extracted separately using this frame:
+  at the time of writing commonly supported by JSON-LD Framing processors, and
+  therefore have to be extracted separately using this frame:
 </p>
 <pre>
 { "@context": "https://w3id.org/ore/context",
