@@ -16,6 +16,14 @@
            padding: 0.5ex;
            margin: 2ex;
         }
+        @media screen {
+          pre {
+            max-height: 30em;
+            border: 1px solid #888;
+            overflow: auto;
+            padding: 1em;
+          }
+        }
         .TODO:before {
                 content: "TODO: ";
                 font-weight: bold;
@@ -884,7 +892,7 @@ for instance to avoid naming conflicts when including the ORE context in another
 <p>
 The content of the <a href="context.json">ORE JSON-LD context</a> at time of writing is:
 </p>
-<pre class="draft">
+<pre>
 {
   "@context" : {
     "Proxy" : {
@@ -1120,7 +1128,9 @@ requiring any further JSON-LD or RDF knowledge.
 </p>
 
 <p>
-The <a href="frame.json">ORE JSON-LD frame</a> at time of writing is:
+The <a href="frame.json">ORE JSON-LD frame</a> is available at
+<a href="https://w3id.org/ore/frame">https://w3id.org/ore/frame</a>, which
+at time of writing is:
 </p>
 
 <pre id="frame.json">
@@ -1137,12 +1147,11 @@ The <a href="frame.json">ORE JSON-LD frame</a> at time of writing is:
 
 <section id="example-framing">
 <h3>5.1 Example framing</h3>
-<p>For example, say we have a <a href="unstructured.json">'unstructured' JSON-LD ORE manifest
+<p>For example, say we have a <a href="unstructured.json">'unstructured' JSON-LD ORE manifest</a>
 after serializing a Resource Map as triples in JSON-LD:
-</a>:
 </p>
 
-<pre>
+<pre class="big-example">
 {
   "@graph": [
     {
@@ -1342,7 +1351,8 @@ after serializing a Resource Map as triples in JSON-LD:
 <p>
   Note: <code>@reverse</code> properties like <code>proxies</code> is not
   at the time of writing commonly supported by JSON-LD Framing processors, and
-  therefore have to be extracted separately using this frame:
+  therefore have to be extracted separately using this
+  <a href="frame-proxies.json">frame for proxies</a>:
 </p>
 <pre>
 { "@context": "https://w3id.org/ore/context",
