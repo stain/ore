@@ -1,4 +1,4 @@
-{ "@context": "https://w3id.org/ore/1.0/context",
+{ "@context": "https://w3id.org/ore/context",
   "@type": "ResourceMap",
   "describes": {
       "@id": "http://example.com/aggregation-1",
